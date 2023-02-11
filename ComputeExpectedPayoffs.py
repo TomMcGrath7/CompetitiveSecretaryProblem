@@ -11,20 +11,39 @@ print(l)
 payoffs1 = np.empty((n, 2))
 payoffs = np.empty((n, 2))
 
-# for i in range(1, n):
-#     payoffs1[i-1, 0] = (1-(l/n))**(i-1)
-#     payoffs1[i-1, 1] = (l/n)
+for k in range(1, n+1):
+    if (n - k - l > 0):
+        # print(n)
+        # print(k)
+        # print(l)
+        x = (math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l)*math.factorial(n-1))
+        # print(math.factorial(n-1-l)*math.factorial(n-k))
+        # print(math.factorial(n-k-l)*math.factorial(n-1))
+        # print((math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l)*math.factorial(n-1)))
+        payoffs1[k - 1, 0] = x
+        payoffs1[k - 1 , 1] = (l/(n-1))
+    else:
+        # print(n)
+        # print(k)
+        # print(l)
+        payoffs1[k - 1, 0] = 0
+        payoffs1[k - 1, 1] = (l/(n-1))
+
+payoffs1[(n-l):n, 0] = 0
+
+print(np.round(payoffs1, decimals=3))
+
 
 # print(list(range(n)))
 
-payoffs[0:n, 0] = (1-(l/n))**(np.array(list(range(n))))
-payoffs[0:n, 1] = (l/n)
-payoffs[(n-l):n, 0] = 0
+# payoffs[0:n, 0] = (1-(l/n))**(np.array(list(range(n))))
+# payoffs[0:n, 0] = (math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l))
+# payoffs[0:n, 1] = (l/(n-1))
+# payoffs[(n-l):n, 0] = 0
 
+# print(payoffs1)
+# print(np.round(payoffs, decimals=5))
 
-print(np.round(payoffs, decimals=3))
-
-# print(np.round(payoffs1, decimals=3))
 
 
 def prob_best(x):
