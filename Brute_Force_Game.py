@@ -30,5 +30,6 @@ for i in range(len(perms)):
 
 win_percents = wins/len(perms)
 
+# Not working
 print(win_percents)
 
