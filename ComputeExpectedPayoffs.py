@@ -4,9 +4,10 @@ import numpy as np
 
 e = math.e
 
-n = 10
-l = 2 # int(round(n/e, 0))
+n = 1000
+l = int(round(n/e, 0)) # 2
 print(l)
+print(int(round(n/e, 0)))
 
 payoffs1 = np.empty((n, 2))
 payoffs = np.empty((n, 2))
@@ -31,8 +32,8 @@ for k in range(1, n+1):
 
 payoffs1[(n-l):n, 0] = 0
 
-print(np.round(payoffs1, decimals=3))
-print("Now including alpha")
+# print(np.round(payoffs1, decimals=3))
+# print("Now including alpha")
 
 
 # print(list(range(n)))
@@ -84,6 +85,17 @@ def expected_payoffs(n, l, alpha):
     return np.round(payoffs, decimals=3)
 
 
+payoffs = expected_payoffs(n, l, alpha=1)
+
 print(expected_payoffs(n, l, alpha=1))
-print("here is the second")
-print(expected_payoffs(n, l , alpha=2))
+# print("here is the second")
+# print(expected_payoffs(n, l , alpha=2))
+
+def amount_preferring_alpha1(payoffs):
+    amount = 0
+    for i in range(0, len(payoffs)):
+        if payoffs[i, 0] > payoffs[i, 1]:
+            amount += 1
+    return amount
+
+print(amount_preferring_alpha1(payoffs))
