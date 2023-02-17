@@ -2,8 +2,8 @@ import numpy as np
 import itertools
 
 """ Inputs """
-n = 100
-l = 37
+n = 10
+l = 4
 
 candidates = np.array(list(range(1, n+1)))
 print(candidates)

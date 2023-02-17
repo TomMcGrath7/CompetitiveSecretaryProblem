@@ -4,8 +4,8 @@ import numpy as np
 
 e = math.e
 
-n = 1000
-l = int(round(n/e, 0)) # 2
+n = 10
+l = 5 # int(round(n/e, 0)) # 2
 print(l)
 print(int(round(n/e, 0)))
 
