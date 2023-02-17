@@ -44,3 +44,16 @@ win_percents = wins/len(perms)
 # Not working
 print(win_percents)
 
+""" To DO """
+# Allow for a candidate to be put into a certain position and calculate the win percentage of that candidate
+# for that subset of the permutations
+
+# Have a function that computes the proability of picking the best candidate given, n, l and k and alpha.
+
+# Create nice LaTex table fixing the parameters and showing how choices change for the different agents as the
+# paramters change
+
+# Plot graphs of the different probabilities as the different parameters change
+
+# Lastly, can we find an l that is robust to any k, so the choice of k is unknown to the employer
+
