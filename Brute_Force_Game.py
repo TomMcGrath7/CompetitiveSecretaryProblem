@@ -57,3 +57,5 @@ print(win_percents)
 
 # Lastly, can we find an l that is robust to any k, so the choice of k is unknown to the employer
 
+# Add a mememory manager to the script to get used to working with one and see what the largest instance we can
+# compute is
