@@ -10,4 +10,4 @@ k = 2 # this the rank of the strategic candidate, with 1 being the best
 
 # We can calculate the probability for each l and k and alpha, that of the employer picking the best candidate
 
-# we then find the l that maximises this proability and choose it
+# we then find the l that maximises this probability and choose it
