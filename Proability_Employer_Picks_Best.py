@@ -4,7 +4,7 @@ import itertools
 """ Inputs """
 n = 4
 l = 1
-k = 4
+k = 3
 alpha = 1
 
 # candidates = np.array(list(range(1, n+1)))
@@ -12,6 +12,8 @@ alpha = 1
 #
 # # Fix position of player k
 # fixed_player = candidates[k-1]
+# print(fixed_player)
+# print(k-1)
 #
 # # Remove fixed player from candidates
 # candidates = np.delete(candidates, k-1)
@@ -23,24 +25,31 @@ alpha = 1
 # # Add fixed player back to each permutation
 # # perms = [np.insert(perm, l+alpha-1, fixed_player) for perm in perms]
 # # perms = [(fixed_player,) + perm for perm in perms]
-# perms = [perm[:l+alpha-1] + (fixed_player,) + perm[l+alpha-1:] for perm in perms]
-# print(perms)
+# perms1 = [perm[:l+alpha-1] + (fixed_player,) + perm[l+alpha-1:] for perm in perms]
+# print(perms1)
+#
+# print("break")
 
 
 def create_custom_permutations(number_of_players, k, l, alpha):
     candidates = np.array(list(range(1, number_of_players + 1)))
+    print(candidates)
     fixed_player = candidates[k-1]
+    print(fixed_player)
+    candidates = np.delete(candidates, k - 1)
     perms = list(itertools.permutations(candidates))
+    print(perms)
     perms = [perm[:l + alpha - 1] + (fixed_player,) + perm[l + alpha - 1:] for perm in perms]
     return perms
 
 
 perms = create_custom_permutations(n, k, l, alpha)
+print(perms)
 # Compute probability that item 1 is picked each time
 # Count how many times item is the winner
 
 # wins = np.zeros(n)
-# print(wins)
+# # print(wins)
 #
 # for i in range(len(perms)):
 #     best_rank = n
@@ -58,6 +67,8 @@ perms = create_custom_permutations(n, k, l, alpha)
 #
 # win_percents = wins/len(perms)
 # print(win_percents)
+#
+# print("Break")
 
 # put all this in a function
 # then call the function for different l's and for the different l look at when probability of beiing picked for the k puts him at the end
@@ -84,5 +95,5 @@ def empirical_wins(permutations, number_of_players, l):
     return win_percents
 
 
-win_percents = empirical_wins(perms, n, l)
+win_percents = empirical_wins(perms1, n, l)
 print(win_percents)
