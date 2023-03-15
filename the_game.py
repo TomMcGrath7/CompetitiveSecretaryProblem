@@ -2,6 +2,8 @@
 # import numpy as np
 import Functions
 
+""" Try rewrite this in another function where numpy was wotking if a new file doesn't do the job already"""
+
 """ Inputs """
 
 n = 4 # number of players
