@@ -4,8 +4,8 @@ import numpy as np
 
 e = math.e
 
-n = 10
-l = 5 # int(round(n/e, 0)) # 2
+n = 4
+l = 1 # int(round(n/e, 0)) # 2
 print(l)
 print(int(round(n/e, 0)))
 
@@ -88,6 +88,7 @@ def expected_payoffs(n, l, alpha):
 payoffs = expected_payoffs(n, l, alpha=1)
 
 print(expected_payoffs(n, l, alpha=1))
+print(payoffs[1])
 # print("here is the second")
 # print(expected_payoffs(n, l , alpha=2))
 
