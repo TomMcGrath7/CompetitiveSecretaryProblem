@@ -95,5 +95,5 @@ def empirical_wins(permutations, number_of_players, l):
     return win_percents
 
 
-win_percents = empirical_wins(perms1, n, l)
+win_percents = empirical_wins(perms, n, l)
 print(win_percents)
