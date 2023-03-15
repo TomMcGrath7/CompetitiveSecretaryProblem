@@ -91,11 +91,13 @@ print(expected_payoffs(n, l, alpha=1))
 # print("here is the second")
 # print(expected_payoffs(n, l , alpha=2))
 
+
 def amount_preferring_alpha1(payoffs):
     amount = 0
     for i in range(0, len(payoffs)):
         if payoffs[i, 0] > payoffs[i, 1]:
             amount += 1
     return amount
+
 
 print(amount_preferring_alpha1(payoffs))
