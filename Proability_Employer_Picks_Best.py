@@ -1,5 +1,6 @@
 import numpy as np
 import itertools
+import Functions
 
 """ Inputs """
 n = 4
@@ -97,3 +98,4 @@ def empirical_wins(permutations, number_of_players, l):
 
 win_percents = empirical_wins(perms, n, l)
 print(win_percents)
+
