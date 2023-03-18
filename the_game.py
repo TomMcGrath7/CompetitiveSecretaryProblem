@@ -14,6 +14,11 @@ import Functions
 # get a know when you ask again because of passage of time
 # 
 
+# can use this present best approach or how do you approach the same game but the number of players is very high and
+# there is a cost for searching, problem is the cost for searching could change things a lot, although still interesting
+# to graph
+
+
 
 """ Inputs """
 
