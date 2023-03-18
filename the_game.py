@@ -18,7 +18,7 @@ import Functions
 # there is a cost for searching, problem is the cost for searching could change things a lot, although still interesting
 # to graph, this can then be used in search algorithms potentially
 
-#
+# look for best way to graph different asymptotics and maths functions since we have all the formulas
 
 """ Inputs """
 
