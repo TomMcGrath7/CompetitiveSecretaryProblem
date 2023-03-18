@@ -2,7 +2,18 @@
 # import numpy as np
 import Functions
 
-""" Try rewrite this in another function where numpy was wotking if a new file doesn't do the job already"""
+
+""" New Ideas """
+# For the game to represent life more realistically, you can change the game such that decision to say no is not final
+# that you can have a present best and then keep searching but the more you search increases probabiltiy that you can
+# not go back and get the present best so may lose out
+# Can be a function of the rating of current one and number of additional searches
+# How do you rate? Becomes difficult, can make it multidimesional optimisaton but then just becomes one function to give
+# overall score
+# There is also probability that candidate may explore other options although this is basically the probability that you
+# get a know when you ask again because of passage of time
+# 
+
 
 """ Inputs """
 
