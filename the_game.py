@@ -16,9 +16,9 @@ import Functions
 
 # can use this present best approach or how do you approach the same game but the number of players is very high and
 # there is a cost for searching, problem is the cost for searching could change things a lot, although still interesting
-# to graph
+# to graph, this can then be used in search algorithms potentially
 
-
+#
 
 """ Inputs """
 
