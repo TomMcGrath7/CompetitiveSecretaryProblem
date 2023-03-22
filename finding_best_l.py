@@ -50,7 +50,7 @@ def expected_payoffs(n, l, alpha):
     return np.round(payoffs, decimals=3)
 
 """ Inputs """
-n = 10
+n = 6
 k = 2
 
 """ Find best l """

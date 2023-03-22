@@ -1,11 +1,13 @@
 import numpy as np
 import itertools
 import Functions
+import math
+
 
 """ Inputs """
-n = 4
-l = 1
-k = 3
+n = 90
+l = 60
+k = 70
 alpha = 1
 
 # candidates = np.array(list(range(1, n+1)))
@@ -34,18 +36,18 @@ alpha = 1
 
 def create_custom_permutations(number_of_players, k, l, alpha):
     candidates = np.array(list(range(1, number_of_players + 1)))
-    print(candidates)
+    # print(candidates)
     fixed_player = candidates[k-1]
-    print(fixed_player)
+    # print(fixed_player)
     candidates = np.delete(candidates, k - 1)
     perms = list(itertools.permutations(candidates))
-    print(perms)
+    # print(perms)
     perms = [perm[:l + alpha - 1] + (fixed_player,) + perm[l + alpha - 1:] for perm in perms]
     return perms
 
 
-perms = create_custom_permutations(n, k, l, alpha)
-print(perms)
+# perms = create_custom_permutations(n, k, l, alpha)
+# print(perms)
 # Compute probability that item 1 is picked each time
 # Count how many times item is the winner
 
@@ -96,6 +98,18 @@ def empirical_wins(permutations, number_of_players, l):
     return win_percents
 
 
-win_percents = empirical_wins(perms, n, l)
-print(win_percents)
+def proability_picking_best(n, l, k):
+    sum = 0
+    for i in range(2, k-2):
+        print(i)
+        sum += (math.factorial(l)*math.factorial(n-l-1)*(math.factorial(n-(i+1))/(math.factorial(l-1)*math.factorial(n-i-l))))*(1/(i-1))
+    denominator = math.factorial(n-1)
+    return sum/denominator
+
+
+# win_percents = empirical_wins(perms, n, l)
+# print(win_percents)
+
+prob_winning = proability_picking_best(n, l, k)
+print(prob_winning)
 

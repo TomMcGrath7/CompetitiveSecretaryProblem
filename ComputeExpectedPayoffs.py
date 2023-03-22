@@ -1,11 +1,12 @@
 import math
 import numpy as np
 # import matplotlib.pyplot
+import pandas as pd
 
 e = math.e
 
-n = 4
-l = 1 # int(round(n/e, 0)) # 2
+n = 6
+l = 5 # int(round(n/e, 0)) # 2
 print(l)
 print(int(round(n/e, 0)))
 
@@ -87,8 +88,42 @@ def expected_payoffs(n, l, alpha):
 
 payoffs = expected_payoffs(n, l, alpha=1)
 
-print(expected_payoffs(n, l, alpha=1))
-print(payoffs[1])
+# print(expected_payoffs(n, l, alpha=1))
+
+print(payoffs)
+
+index = []
+for a in range(0, n):
+    current_l = str(a+1)
+    index.append("n = " + current_l)
+print(index)
+
+df = pd.DataFrame(payoffs, columns=['alpha = 1', 'alpha = 5'], index=index )
+# print(df)
+print(df.to_latex(index=True))
+
+""" Finish this Code later, for now it is easy to do manually"""
+# preferred = []
+# for b in range(0,n):
+#     position = str(n-(b+1))
+#     payoffs = expected_payoffs(n, b, 1)
+#     for a in range(0, n):
+#         if payoffs[a][0] >= payoffs[a][1]:
+#             preferred.append("alpha = 1")
+#         else:
+#             preferred.append("alpha = " + position)
+#
+# print(preferred)
+
+# columns = []
+# for a in range(0, n):
+#     current_l = str(a+1)
+#     columns.append("l = " + current_l)
+#
+# print(columns)
+
+
+# print(payoffs[1])
 # print("here is the second")
 # print(expected_payoffs(n, l , alpha=2))
 
