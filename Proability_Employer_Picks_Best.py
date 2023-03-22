@@ -2,12 +2,13 @@ import numpy as np
 import itertools
 import Functions
 import math
+import pandas as pd
 
 
 """ Inputs """
-n = 90
-l = 60
-k = 70
+n = 6
+l = 1
+k = 3
 alpha = 1
 
 # candidates = np.array(list(range(1, n+1)))
@@ -46,7 +47,7 @@ def create_custom_permutations(number_of_players, k, l, alpha):
     return perms
 
 
-# perms = create_custom_permutations(n, k, l, alpha)
+perms = create_custom_permutations(n, k, l, alpha)
 # print(perms)
 # Compute probability that item 1 is picked each time
 # Count how many times item is the winner
@@ -107,9 +108,37 @@ def proability_picking_best(n, l, k):
     return sum/denominator
 
 
-# win_percents = empirical_wins(perms, n, l)
-# print(win_percents)
+# prob_winning = proability_picking_best(n, l, k)
+# print(prob_winning)
 
-prob_winning = proability_picking_best(n, l, k)
-print(prob_winning)
+win_percents = empirical_wins(perms, n, l)
+print(win_percents[0])
 
+percentage = []
+for a in range(1, n+1): # for each k
+    row = []
+    for b in range(1, n): # for each l
+        perms = create_custom_permutations(n, a, b, alpha)
+        pick_percent = empirical_wins(perms, n, b)[0]
+        row.append(pick_percent)
+    percentage.append(row)
+
+
+print(percentage)
+
+index = []
+for a in range(0, n):
+    current_l = str(a+1)
+    index.append("n = " + current_l)
+print(index)
+
+columns = []
+for a in range(0, n-1):
+    current_l = str(a+1)
+    columns.append("l = " + current_l)
+
+print(columns)
+
+df = pd.DataFrame(percentage, columns=columns, index=index )
+# print(df)
+print(df.to_latex(index=True))

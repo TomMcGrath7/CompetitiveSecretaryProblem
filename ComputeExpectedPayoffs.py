@@ -98,6 +98,13 @@ for a in range(0, n):
     index.append("n = " + current_l)
 print(index)
 
+# columns = []
+# for a in range(0, n):
+#     current_l = str(a+1)
+#     columns.append("l = " + current_l)
+#
+# print(columns)
+
 df = pd.DataFrame(payoffs, columns=['alpha = 1', 'alpha = 5'], index=index )
 # print(df)
 print(df.to_latex(index=True))
@@ -114,13 +121,6 @@ print(df.to_latex(index=True))
 #             preferred.append("alpha = " + position)
 #
 # print(preferred)
-
-# columns = []
-# for a in range(0, n):
-#     current_l = str(a+1)
-#     columns.append("l = " + current_l)
-#
-# print(columns)
 
 
 # print(payoffs[1])
