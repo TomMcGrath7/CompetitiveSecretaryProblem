@@ -48,7 +48,6 @@ payoffs1[(n-l):n, 0] = 0
 # print(np.round(payoffs, decimals=5))
 
 
-
 def prob_best(x):
     return -x*np.log(x)
 
