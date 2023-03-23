@@ -6,7 +6,7 @@ import pandas as pd
 e = math.e
 
 n = 6
-l = 5 # int(round(n/e, 0)) # 2
+l = 1 # int(round(n/e, 0)) # 2
 print(l)
 print(int(round(n/e, 0)))
 
@@ -60,7 +60,7 @@ def prob_best(x):
 
 def expected_payoffs(n, l, alpha):
     for k in range(1, n + 1):
-        if (n - k - l - alpha + 1 > 0):
+        if (n - k - l - alpha + 1 >= 0):
             # print(n)
             # print(k)
             # print(l)
@@ -82,7 +82,7 @@ def expected_payoffs(n, l, alpha):
 
     payoffs[(n - l):n, 0] = 0
 
-    return np.round(payoffs, decimals=3)
+    return np.round(payoffs, decimals=4)
 
 
 payoffs = expected_payoffs(n, l, alpha=1)
@@ -106,7 +106,7 @@ print(index)
 
 df = pd.DataFrame(payoffs, columns=['alpha = 1', 'alpha = 5'], index=index )
 # print(df)
-print(df.to_latex(index=True))
+# print(df.to_latex(index=True))
 
 """ Finish this Code later, for now it is easy to do manually"""
 # preferred = []
