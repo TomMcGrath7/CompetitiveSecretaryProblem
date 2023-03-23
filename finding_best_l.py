@@ -51,7 +51,7 @@ def expected_payoffs(n, l, alpha):
 
 """ Inputs """
 n = 6
-k = 2
+k = 3
 
 """ Find best l """
 best_l = 0
