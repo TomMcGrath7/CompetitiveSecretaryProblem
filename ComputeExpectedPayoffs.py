@@ -90,6 +90,7 @@ payoffs = expected_payoffs(n, l, alpha=1)
 # print(expected_payoffs(n, l, alpha=1))
 
 print(payoffs)
+print(payoffs)
 
 index = []
 for a in range(0, n):
