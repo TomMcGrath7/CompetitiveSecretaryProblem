@@ -10,28 +10,28 @@ l = 1 # int(round(n/e, 0)) # 2
 print(l)
 print(int(round(n/e, 0)))
 
-payoffs1 = np.empty((n, 2))
-payoffs = np.empty((n, 2))
-
-for k in range(1, n+1):
-    if (n - k - l > 0):
-        # print(n)
-        # print(k)
-        # print(l)
-        x = (math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l)*math.factorial(n-1))
-        # print(math.factorial(n-1-l)*math.factorial(n-k))
-        # print(math.factorial(n-k-l)*math.factorial(n-1))
-        # print((math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l)*math.factorial(n-1)))
-        payoffs1[k - 1, 0] = x
-        payoffs1[k - 1 , 1] = (l/(n-1))
-    else:
-        # print(n)
-        # print(k)
-        # print(l)
-        payoffs1[k - 1, 0] = 0
-        payoffs1[k - 1, 1] = (l/(n-1))
-
-payoffs1[(n-l):n, 0] = 0
+# payoffs1 = np.empty((n, 2))
+# payoffs = np.empty((n, 2))
+#
+# for k in range(1, n+1):
+#     if (n - k - l > 0):
+#         # print(n)
+#         # print(k)
+#         # print(l)
+#         x = (math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l)*math.factorial(n-1))
+#         # print(math.factorial(n-1-l)*math.factorial(n-k))
+#         # print(math.factorial(n-k-l)*math.factorial(n-1))
+#         # print((math.factorial(n-1-l)*math.factorial(n-k))/(math.factorial(n-k-l)*math.factorial(n-1)))
+#         payoffs1[k - 1, 0] = x
+#         payoffs1[k - 1 , 1] = (l/(n-1))
+#     else:
+#         # print(n)
+#         # print(k)
+#         # print(l)
+#         payoffs1[k - 1, 0] = 0
+#         payoffs1[k - 1, 1] = (l/(n-1))
+#
+# payoffs1[(n-l):n, 0] = 0
 
 # print(np.round(payoffs1, decimals=3))
 # print("Now including alpha")
@@ -59,6 +59,7 @@ def prob_best(x):
 
 
 def expected_payoffs(n, l, alpha):
+    payoffs = np.empty((n, 2))
     for k in range(1, n + 1):
         if (n - k - l - alpha + 1 >= 0):
             # print(n)
@@ -85,11 +86,12 @@ def expected_payoffs(n, l, alpha):
     return np.round(payoffs, decimals=4)
 
 
+l = 0
+
 payoffs = expected_payoffs(n, l, alpha=1)
 
 # print(expected_payoffs(n, l, alpha=1))
 
-print(payoffs)
 print(payoffs)
 
 index = []
@@ -107,7 +109,7 @@ print(index)
 
 df = pd.DataFrame(payoffs, columns=['alpha = 1', 'alpha = 5'], index=index )
 # print(df)
-# print(df.to_latex(index=True))
+print(df.to_latex(index=True))
 
 """ Finish this Code later, for now it is easy to do manually"""
 # preferred = []

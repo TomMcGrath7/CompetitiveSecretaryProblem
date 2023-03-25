@@ -111,6 +111,11 @@ def proability_picking_best(n, l, k):
 # prob_winning = proability_picking_best(n, l, k)
 # print(prob_winning)
 
+n = 6
+l = 3
+k = 2
+alpha = 3
+
 win_percents = empirical_wins(perms, n, l)
 print(win_percents[0])
 
@@ -118,6 +123,7 @@ percentage = []
 for a in range(1, n+1): # for each k
     row = []
     for b in range(1, n): # for each l
+        alpha = n-l
         perms = create_custom_permutations(n, a, b, alpha)
         pick_percent = empirical_wins(perms, n, b)[0]
         row.append(pick_percent)
@@ -140,5 +146,17 @@ for a in range(0, n-1):
 print(columns)
 
 df = pd.DataFrame(percentage, columns=columns, index=index )
-# print(df)
-print(df.to_latex(index=True))
+print(df)
+# print(df.to_latex(index=True))
+
+
+def classic_probability_picking_best(n, l):
+    sum = 0
+    for a in range(l, n):
+        sum += (1/(a-1))
+    return (((l)-1)/n)*sum
+
+
+# print(classic_probability_picking_best(100000000, round(100000000/math.e)))
+# print(1/math.e)
+# print(classic_probability_picking_best(100000000, round(100000000/math.e)) - 1/math.e)
