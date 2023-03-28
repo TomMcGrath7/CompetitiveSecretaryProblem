@@ -160,3 +160,5 @@ def classic_probability_picking_best(n, l):
 # print(classic_probability_picking_best(100000000, round(100000000/math.e)))
 # print(1/math.e)
 # print(classic_probability_picking_best(100000000, round(100000000/math.e)) - 1/math.e)
+
+print(classic_probability_picking_best(5, 2))
