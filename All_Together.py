@@ -56,13 +56,16 @@ def probability_candidate_chosen(n, l, alpha):
 
 
 def probability_best_chosen(n, l, k):
+    if l == 0:
+        return 1 / n
     if k == 1:
         return 1
     elif (1 < k <= (n - l + 1)):  # confirm the right bound
         numerator = 0
         for i in range(2, k):
-            numerator += (1 / (i - 1))((math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
-                                       (math.factorial(l - 1) * math.factorial(n - l - i)))
+            print(i)
+            numerator += (1 / (i - 1))*((math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
+                (math.factorial(l - 1) * math.factorial(n - l - i)))
         denominator = math.factorial(n - 1)
         return numerator / denominator
     elif (k > (n - l + 1)):
@@ -70,3 +73,12 @@ def probability_best_chosen(n, l, k):
         for i in range(l + 1, n):
             sum += (1 / (i - 1))
         return (l / (n - 1)) * sum
+
+
+n = 6
+l = 1
+alpha = (6-3)
+k = 6
+
+print(probability_best_chosen(n, l, k))
+
