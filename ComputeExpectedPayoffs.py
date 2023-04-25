@@ -5,9 +5,9 @@ import pandas as pd
 
 e = math.e
 
-n = 6
+n = 10
 l = 1 # int(round(n/e, 0)) # 2
-print(l)
+# print(l)
 print(int(round(n/e, 0)))
 
 # payoffs1 = np.empty((n, 2))
@@ -61,7 +61,7 @@ def prob_best(x):
 def expected_payoffs(n, l, alpha):
     payoffs = np.empty((n, 2))
     for k in range(1, n + 1):
-        if (n - k - l - alpha + 1 >= 0):
+        if (n - k - l - alpha + 2 > 0):
             # print(n)
             # print(k)
             # print(l)
@@ -74,6 +74,8 @@ def expected_payoffs(n, l, alpha):
             # print(lower)
             payoffs[k - 1, 0] = upper/lower
             payoffs[k - 1, 1] = (l / (n - 1))
+            # print(upper/lower)
+            # print((l / (n - 1)))
         else:
             # print(n)
             # print(k)
@@ -81,12 +83,12 @@ def expected_payoffs(n, l, alpha):
             payoffs[k - 1, 0] = 0
             payoffs[k - 1, 1] = (l / (n - 1))
 
-    payoffs[(n - l):n, 0] = 0
+    # payoffs[(n - l):n, 0] = 0
 
     return np.round(payoffs, decimals=4)
 
-
-l = 0
+n = 10
+l = 9
 
 payoffs = expected_payoffs(n, l, alpha=1)
 
@@ -97,8 +99,8 @@ print(payoffs)
 index = []
 for a in range(0, n):
     current_l = str(a+1)
-    index.append("n = " + current_l)
-print(index)
+    index.append("k = " + current_l)
+# print(index)
 
 # columns = []
 # for a in range(0, n):
@@ -107,7 +109,7 @@ print(index)
 #
 # print(columns)
 
-df = pd.DataFrame(payoffs, columns=['alpha = 1', 'alpha = 5'], index=index )
+df = pd.DataFrame(payoffs, columns=[ 'alpha = 1', 'alpha = (n-l)'], index=index )
 # print(df)
 print(df.to_latex(index=True))
 

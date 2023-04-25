@@ -111,7 +111,7 @@ def proability_picking_best(n, l, k):
 # prob_winning = proability_picking_best(n, l, k)
 # print(prob_winning)
 
-n = 6
+n = 10
 l = 3
 k = 2
 alpha = 3
