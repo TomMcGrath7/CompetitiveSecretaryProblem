@@ -27,10 +27,10 @@ def empirical_wins_without_choice(n, l):
     return win_percents
 
 
-n = 6
+n = 4
 l = 3
-alpha = (6-3)
-k = 6
+alpha = 1
+k = 4
 
 emp = empirical_wins_without_choice(n, l)
 print(emp)
