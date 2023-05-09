@@ -1,11 +1,12 @@
 import itertools
 import numpy as np
 
+
 # This function returns the empirical number of times somebody wins without any choice
 # Basically if you were to have every possible permutation, what are the probabilities that each person wins
 
 def empirical_wins_without_choice(n, l):
-    candidates = np.array(list(range(1, n+1)))
+    candidates = np.array(list(range(1, n + 1)))
     perms = list(itertools.permutations(candidates))
     wins = np.zeros(n)
     for i in range(len(perms)):
@@ -25,10 +26,10 @@ def empirical_wins_without_choice(n, l):
     win_percents = wins / len(perms)
     return win_percents
 
+
 n = 10
 l = 3
 alpha = 1
-
 
 emp = empirical_wins_without_choice(n, l)
 print(emp)
