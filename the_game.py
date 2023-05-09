@@ -59,6 +59,8 @@ best_l = 0
 # if it works, we can then make this a function and loop through all the different k's and find the l that performs
 # the best given a uniform distribution over all possible k's
 
+n = 10
+
 for k in range(1,n-1):
     for l in range(1, n - 2):
         alpha = 1
