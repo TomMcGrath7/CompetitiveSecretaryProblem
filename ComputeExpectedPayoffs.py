@@ -113,24 +113,6 @@ df = pd.DataFrame(payoffs, columns=[ 'alpha = 1', 'alpha = (n-l)'], index=index 
 # print(df)
 print(df.to_latex(index=True))
 
-""" Finish this Code later, for now it is easy to do manually"""
-# preferred = []
-# for b in range(0,n):
-#     position = str(n-(b+1))
-#     payoffs = expected_payoffs(n, b, 1)
-#     for a in range(0, n):
-#         if payoffs[a][0] >= payoffs[a][1]:
-#             preferred.append("alpha = 1")
-#         else:
-#             preferred.append("alpha = " + position)
-#
-# print(preferred)
-
-
-# print(payoffs[1])
-# print("here is the second")
-# print(expected_payoffs(n, l , alpha=2))
-
 
 def amount_preferring_alpha1(payoffs):
     amount = 0
