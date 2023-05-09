@@ -33,12 +33,22 @@ def expected_candidate_payoffs(n, l, alpha):
     return np.round(payoffs, decimals=4)
 
 
-n = 10
+n = 6
 l = 3
 alpha = 1
 
 expected_payoff = expected_candidate_payoffs(n, l, alpha)
 print(expected_payoff)
+
+def tableFy(payoffs):
+    index = []
+    for a in range(0, n):
+        current_k = str(a + 1)
+        index.append("k = " + current_k)
+
+    df = pd.DataFrame(payoffs, columns=['alpha = 1', 'alpha = (n-l)'], index=index)
+    return df
+
 
 """ Printing nice tables"""
 index = []
@@ -46,9 +56,9 @@ for a in range(0, n):
     current_k = str(a + 1)
     index.append("k = " + current_k)
 
-df = pd.DataFrame(expected_payoff, columns=['alpha = 1', 'alpha = (n-l)'], index=index)
+# df = tableFy(expected_payoff)
 # print(df)
-print(df.to_latex(index=True))
+# print(df.to_latex(index=True))
 
 
 def amount_preferring_alpha1(payoffs):

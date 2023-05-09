@@ -27,10 +27,10 @@ def empirical_wins_without_choice(n, l):
     return win_percents
 
 
-n = 10
+n = 6
 l = 3
-alpha = 1
-k = 3
+alpha = (6-3)
+k = 6
 
 emp = empirical_wins_without_choice(n, l)
 print(emp)
@@ -46,6 +46,7 @@ def create_custom_permutations(number_of_players, k, l, alpha):
 
 
 perms = create_custom_permutations(n, k, l, alpha)
+print(perms)
 
 
 def empirical_wins(permutations, number_of_players, l):
