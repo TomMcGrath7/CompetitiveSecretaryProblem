@@ -37,7 +37,7 @@ def probability_candidate_chosen(n, l, alpha):
         else:
             payoffs[k - 1, 0] = 0
             payoffs[k - 1, 1] = (l / (n - 1))
-    payoffs[(n - l):n, 0] = 0
+    # payoffs[(n - l):n, 0] = 0
     return np.round(payoffs, decimals=4)
 
 

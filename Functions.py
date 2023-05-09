@@ -35,7 +35,7 @@ def empirical_wins(permutations, number_of_players, l):
 def expected_payoffs(n, l, alpha):
     payoffs = np.empty((n, 2))
     for k in range(1, n + 1):
-        if (n - k - l - alpha + 1 > 0):
+        if (n - k - l - alpha + 1 >= 0):
             upper = (math.factorial(l) * math.factorial(alpha - 1) * math.factorial(n - l - alpha) * math.factorial(n - k))
             lower = (math.factorial(n - 1) * math.factorial(n - k - l - alpha + 1) * math.factorial(l + alpha - 1))
             payoffs[k - 1, 0] = upper/lower
