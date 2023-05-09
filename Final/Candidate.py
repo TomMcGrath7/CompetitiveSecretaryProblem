@@ -30,28 +30,6 @@ def expected_candidate_payoffs(n, l, alpha):
 
     return np.round(payoffs, decimals=4)
 
-
-def empirical_wins_without_choice(n, l):
-    candidates = np.array(list(range(1, n+1)))
-    perms = list(itertools.permutations(candidates))
-    wins = np.zeros(n)
-    for i in range(len(perms)):
-        best_rank = n
-        for j in range(0, l):
-            if perms[i][j] < best_rank:
-                best_rank = perms[i][j]
-        best_l = best_rank
-        for k in range(l, n):
-            if perms[i][k] < best_rank:
-                best_rank = perms[i][k]
-                wins[best_rank - 1] += 1
-                break
-        if best_l == best_rank:
-            wins[perms[i][n - 1] - 1] += 1
-
-    win_percents = wins / len(perms)
-    return win_percents
-
 n = 10
 l = 3
 alpha = 1
@@ -59,8 +37,6 @@ alpha = 1
 expected_payoff = expected_candidate_payoffs(n, l, alpha)
 print(expected_payoff)
 
-emp = empirical_wins_without_choice(n, l)
-print(emp)
 
 
 
