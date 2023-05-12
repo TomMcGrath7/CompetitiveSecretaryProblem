@@ -33,8 +33,8 @@ def expected_candidate_payoffs(n, l, alpha):
     return np.round(payoffs, decimals=4)
 
 
-n = 6
-l = 3
+n = 10
+l = 4
 alpha = 1
 
 expected_payoff = expected_candidate_payoffs(n, l, alpha)

@@ -40,7 +40,7 @@ def probability_best_chosen_BR(n, l, k):
         # print(n)
         # print(l)
         # print(k)
-        if l <= (math.factorial(n - l - 1) * math.factorial(n - k)) / (math.factorial(n - 2) * math.factorial(n - k - l)):  # confirm the right bound
+        if l < (math.factorial(n - l - 1) * math.factorial(n - k)) / (math.factorial(n - 2) * math.factorial(n - k - l)):  # confirm the right bound
             numerator = 0
             for i in range(2, k):
                 numerator += (1 / (i - 1)) * ((math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
@@ -48,7 +48,7 @@ def probability_best_chosen_BR(n, l, k):
             denominator = math.factorial(n - 1)
             return numerator / denominator
 
-        elif l > (math.factorial(n - l - 1) * math.factorial(n - k)) / (math.factorial(n - 2) * math.factorial(n - k - l)):
+        elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (math.factorial(n - 2) * math.factorial(n - k - l)):
             sum = 0
             for i in range(l + 1, n):
                 sum += (1 / (i - 1))
@@ -105,7 +105,7 @@ def many_n(n_max):
     return output
 
 
-output = many_n(50)
+output = many_n(11)
 print(output)
 output = output[1:]
 print(output)
@@ -130,10 +130,12 @@ plt.legend()
 plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
 
 # Display the plot
-# plt.show()
+plt.show()
 
-folder_path = "C:\\Users\\Tom McGrath\\Desktop\\TempUni\\Master\\Thesis\\CompetitiveSecretaryProblem\\Plots"
-filename = "plot1.png"
-plt.savefig((folder_path + '\\' + filename))
+# folder_path = "C:\\Users\\Tom McGrath\\Desktop\\TempUni\\Master\\Thesis\\CompetitiveSecretaryProblem\\Plots"
+# filename = "plot1.png"
+# plt.savefig((folder_path + '\\' + filename))
+import math
 
+print(1/math.e)
 
