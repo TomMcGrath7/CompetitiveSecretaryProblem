@@ -1,6 +1,8 @@
 import numpy as np
 import math
 import itertools
+import pandas as pd
+
 
 #
 # def probability_best_chosen_BR(n, l, k):
@@ -40,15 +42,31 @@ def probability_best_chosen_BR(n, l, k):
         # print(n)
         # print(l)
         # print(k)
-        if l < (math.factorial(n - l - 1) * math.factorial(n - k)) / (math.factorial(n - 2) * math.factorial(n - k - l)):  # confirm the right bound
+        if l < (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+                math.factorial(n - 2) * math.factorial(n - k - l)):  # confirm the right bound
             numerator = 0
             for i in range(2, k):
-                numerator += (1 / (i - 1)) * ((math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
-                                               (math.factorial(l - 1) * math.factorial(n - l - i)))
+                numerator += (1 / (i - 1)) * (
+                            (math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
+                            (math.factorial(l - 1) * math.factorial(n - l - i)))
             denominator = math.factorial(n - 1)
             return numerator / denominator
-
-        elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (math.factorial(n - 2) * math.factorial(n - k - l)):
+        elif l == (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+                math.factorial(n - 2) * math.factorial(n - k - l)):
+            numerator = 0
+            for i in range(2, k):
+                numerator += (1 / (i - 1)) * (
+                        (math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
+                        (math.factorial(l - 1) * math.factorial(n - l - i)))
+            denominator = math.factorial(n - 1)
+            a = numerator / denominator
+            sum = 0
+            for i in range(l + 1, n):
+                sum += (1 / (i - 1))
+            b = (l / (n - 1)) * sum
+            return max(a, b)
+        elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+                math.factorial(n - 2) * math.factorial(n - k - l)):
             sum = 0
             for i in range(l + 1, n):
                 sum += (1 / (i - 1))
@@ -65,12 +83,44 @@ def probability_best_chosen_BR(n, l, k):
 
 def best_l(n):
     l_probs = np.zeros(n)
-    for l in range(0,n):
+    for l in range(0, n):
         sum = 0
-        for k in range(1,n+1):
+        for k in range(1, n + 1):
             sum += probability_best_chosen_BR(n, l, k)
         l_probs[l] = sum
     return l_probs
+
+
+n = 10
+cols = 2
+l = 0
+best_choices = np.zeros((n, cols))
+for i in range(0, n):
+    k = i + 1
+    if 1 < k < (n - l + 1):
+        if l < (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+                math.factorial(n - 2) * math.factorial(n - k - l)):
+            best_choices[i, 0] = "alpha = 1"
+        elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+                math.factorial(n - 2) * math.factorial(n - k - l)):
+            best_choices[i, 0] = "alpha = (n-l)"
+    elif k >= (n - l + 1):
+        best_choices[i, 0] = "alpha = (n-l)"
+    else:
+        print("We got an error")
+    best_choices[i, 1] = probability_best_chosen_BR(n, l, k)
+
+print(best_choices)
+
+
+def table_it(table):
+    index = []
+    for a in range(0, n):
+        current_k = str(a + 1)
+        index.append("k = " + current_k)
+
+    df = pd.DataFrame(table, columns=['Best alpha', 'Probability picking best'], index=index)
+    return df
 
 
 n = 4
@@ -78,8 +128,8 @@ probs = best_l(n)
 print("here is probbs")
 print(probs)
 print(sum(probs))
-print(probs/n)
-print(sum(probs/n))
+print(probs / n)
+print(sum(probs / n))
 # max value of probs
 max_value = np.max(probs)
 print(max_value)
@@ -91,22 +141,22 @@ bestL = np.where(probs == max_value)
 
 
 def many_n(n_max):
-    output = np.zeros((n_max,3))
+    output = np.zeros((n_max, 3))
     # best_l = np.zeros(n_max)
-    for n in range(1,n_max):
+    for n in range(1, n_max):
         l_probs = best_l(n)
-        probabilities = l_probs/n
+        probabilities = l_probs / n
         max_value = np.max(probabilities)
         best_l_2 = np.argmax(probabilities)
-        output[n,0] = n
-        output[n,1] = best_l_2/n
-        output[n,2] = max_value
+        output[n, 0] = n
+        output[n, 1] = best_l_2 / n
+        output[n, 2] = max_value
 
     return output
 
 
 output = many_n(11)
-print(output)
+# print(output)
 output = output[1:]
 print(output)
 
@@ -137,5 +187,4 @@ plt.show()
 # plt.savefig((folder_path + '\\' + filename))
 import math
 
-print(1/math.e)
-
+print(1 / math.e)

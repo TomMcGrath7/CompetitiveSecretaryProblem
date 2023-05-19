@@ -48,7 +48,7 @@ def probability_best_chosen(n, l, k):
 
 
 n = 10
-l = 1
+l = 9
 alpha = 1
 k = 1
 
