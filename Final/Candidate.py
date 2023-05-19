@@ -24,6 +24,9 @@ def expected_candidate_payoffs(n, l, alpha):
             lower = (math.factorial(n - 1) * math.factorial(n - k - l - alpha + 1) * math.factorial(l + alpha - 1))
             payoffs[k - 1, 0] = upper / lower
             payoffs[k - 1, 1] = (l / (n - 1))
+        elif n-l == 1 :
+            payoffs[k - 1, 0] = 1
+            payoffs[k - 1, 1] = 1
         else:
             payoffs[k - 1, 0] = 0
             payoffs[k - 1, 1] = (l / (n - 1))
@@ -34,11 +37,12 @@ def expected_candidate_payoffs(n, l, alpha):
 
 
 n = 10
-l = 4
+l = 9
 alpha = 1
 
 expected_payoff = expected_candidate_payoffs(n, l, alpha)
 print(expected_payoff)
+
 
 def tableFy(payoffs):
     index = []
