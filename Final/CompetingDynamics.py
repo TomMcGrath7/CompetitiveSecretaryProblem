@@ -47,8 +47,8 @@ def probability_best_chosen_BR(n, l, k):
             numerator = 0
             for i in range(2, k):
                 numerator += (1 / (i - 1)) * (
-                            (math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
-                            (math.factorial(l - 1) * math.factorial(n - l - i)))
+                        (math.factorial(l) * math.factorial(n - l - 1) * math.factorial(n - i - 1)) /
+                        (math.factorial(l - 1) * math.factorial(n - l - i)))
             denominator = math.factorial(n - 1)
             return numerator / denominator
         elif l == (math.factorial(n - l - 1) * math.factorial(n - k)) / (
@@ -103,9 +103,9 @@ for i in range(0, n):
             best_choices[i, 0] = 1
         elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (
                 math.factorial(n - 2) * math.factorial(n - k - l)):
-            best_choices[i, 0] = (n-l)
+            best_choices[i, 0] = (n - l)
     elif k >= (n - l + 1):
-        best_choices[i, 0] = (n-l)
+        best_choices[i, 0] = (n - l)
     else:
         print("We got an error")
     best_choices[i, 1] = probability_best_chosen_BR(n, l, k)
@@ -132,21 +132,25 @@ def table_it(table):
 " Here will be the plot for fixed n and vary l. should be quadratic"
 " so we get an array with employer utility and l"
 
-n = 50 # This could change
+n = 50  # This could change
 
 
 def varied_l(n):
-    cols = 2
-    output = np.zeros((n, cols))
-    for l in range(0,n):
-        sum = 0
-        for k in range(1,n+1):
-            sum += probability_best_chosen_BR(n,l,k)
+    columns = 2
+    output = np.zeros((n, columns))
+    for l in range(0, n):
+        summ = 0
+        for k in range(1, n + 1):
+            summ += probability_best_chosen_BR(n, l, k)
             # Get prob. of picking best
             # for every l get the probability of picking the best
-        output[l, 0] = l
-        output[l, 1] = sum
+        output[l, 0] = l/n
+        output[l, 1] = summ/n
     return output
+
+
+plotable = varied_l(n)
+print(plotable)
 
 
 # n = 4
@@ -166,19 +170,44 @@ def varied_l(n):
 # bestL = np.where(probs == max_value)
 #
 #
-# def many_n(n_max):
-#     output = np.zeros((n_max, 3))
-#     # best_l = np.zeros(n_max)
-#     for n in range(1, n_max):
-#         l_probs = best_l(n)
-#         probabilities = l_probs / n
-#         max_value = np.max(probabilities)
-#         best_l_2 = np.argmax(probabilities)
-#         output[n, 0] = n
-#         output[n, 1] = best_l_2 / n
-#         output[n, 2] = max_value
-#
-#     return output
+def many_n(n_max):
+    output = np.zeros((n_max, 3))
+    # best_l = np.zeros(n_max)
+    for n in range(1, n_max):
+        l_probs = best_l(n)
+        probabilities = l_probs / n
+        max_value = np.max(probabilities)
+        best_l_2 = np.argmax(probabilities)
+        output[n, 0] = n
+        output[n, 1] = best_l_2 / n
+        output[n, 2] = max_value
+
+    return output
+
+
+def uniform_weight():
+    pass
+
+
+def linear_decreasing_weight():
+    pass
+
+
+def exponential_decreasing_weight():
+    pass
+
+
+def geometric_decreasing_weight():
+    pass
+
+
+def harmonic_decreasing_weight():
+    pass
+
+
+def decaying_decreasing_weight():
+    pass
+
 #
 #
 # output = many_n(11)
