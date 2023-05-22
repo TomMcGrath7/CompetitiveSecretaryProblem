@@ -185,27 +185,30 @@ def many_n(n_max):
     return output
 
 
-def uniform_weight():
+def uniform_weight(cumulative_probability):
+    return cumulative_probability/len(cumulative_probability)
+
+
+def linear_decreasing_weight(cumulative_probability):
+    adjusted_probability = np.zeros(len(cumulative_probability))
+    for i in range(0,len(cumulative_probability)):
+        adjusted_probability[i] = 0
+        pass
+
+
+def exponential_decreasing_weight(cumulative_probability):
     pass
 
 
-def linear_decreasing_weight():
+def geometric_decreasing_weight(cumulative_probability):
     pass
 
 
-def exponential_decreasing_weight():
+def harmonic_decreasing_weight(cumulative_probability):
     pass
 
 
-def geometric_decreasing_weight():
-    pass
-
-
-def harmonic_decreasing_weight():
-    pass
-
-
-def decaying_decreasing_weight():
+def decaying_decreasing_weight(cumulative_probability):
     pass
 
 #
