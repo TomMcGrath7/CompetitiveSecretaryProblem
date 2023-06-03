@@ -218,6 +218,7 @@ def uniform_weight(cumulative_probability):
     return cumulative_probability / len(cumulative_probability)
 
 
+print("Uniform")
 print(uniform_weight(test))
 print(sum(uniform_weight(test)))
 
@@ -227,11 +228,12 @@ print(sum(uniform_weight(test)))
 def linear_decreasing_weight(cumulative_probability):
     adjusted_probability = np.zeros(len(cumulative_probability))
     for i in range(0, len(cumulative_probability)):
-        adjusted_probability[i] = 2*cumulative_probability[i] * ((len(cumulative_probability) - (i)) / (
-                    len(cumulative_probability) * (len(cumulative_probability) + 1)))
+        adjusted_probability[i] = 2 * cumulative_probability[i] * ((len(cumulative_probability) - (i)) / (
+                len(cumulative_probability) * (len(cumulative_probability) + 1)))
     return adjusted_probability
 
 
+print("linear decreasing")
 print(linear_decreasing_weight(test))
 print(sum(linear_decreasing_weight(test)))
 
@@ -239,32 +241,74 @@ print(sum(linear_decreasing_weight(test)))
 def exponential_decreasing_weight(cumulative_probability):
     adjusted_probability = np.zeros(len(cumulative_probability))
     for i in range(0, len(cumulative_probability)):
-        adjusted_probability[i] = (cumulative_probability[i] * 2**(len(cumulative_probability)-(i)))/((2**((len(cumulative_probability)+1)))-1)
+        adjusted_probability[i] = (cumulative_probability[i] * 2 ** (len(cumulative_probability) - (i))) / (
+                    (2 ** ((len(cumulative_probability) + 1))) - 1)
     return adjusted_probability
 
 
+print("exponential decreasing")
 print(exponential_decreasing_weight(test))
 print(sum(exponential_decreasing_weight(test)))
 
 
 def geometric_decreasing_weight(cumulative_probability, r):
-    a = (1-r)/(1-r**(len(cumulative_probability)))
+    a = (1 - r) / (1 - r ** (len(cumulative_probability)))
     adjusted_probability = np.zeros(len(cumulative_probability))
     for i in range(0, len(cumulative_probability)):
-        adjusted_probability[i] = (cumulative_probability[i] *a*r**(len(cumulative_probability)-(i+1)))
+        # adjusted_probability[i] = (cumulative_probability[i] * a * r ** (len(cumulative_probability) - (i + 1)))
+        adjusted_probability[i] = cumulative_probability[i] * a * r ** i
     return adjusted_probability
 
 
-print(geometric_decreasing_weight(test,.5))
-print(sum(geometric_decreasing_weight(test,.5)))
+print("geometric decreasing")
+print(geometric_decreasing_weight(test, .5))
+print(sum(geometric_decreasing_weight(test, .5)))
 
 
 def harmonic_decreasing_weight(cumulative_probability):
-    pass
+    n = len(cumulative_probability)
+    adjusted_probability = np.zeros(n)
+    harmonic_sum = sum(1 / (i + 1) for i in range(n))
+    for i in range(n):
+        adjusted_probability[i] = cumulative_probability[i] / harmonic_sum / (i + 1)
+
+    return adjusted_probability
 
 
-def decaying_decreasing_weight(cumulative_probability):
-    pass
+print("harmonic decreasing")
+print(harmonic_decreasing_weight(test))
+print(sum(harmonic_decreasing_weight(test)))
+
+
+def decaying_decreasing_weight(cumulative_probability, decay_constant):
+    n = len(cumulative_probability)
+    adjusted_probability = np.zeros(n)
+
+    for i in range(n):
+        adjusted_probability[i] = np.exp(-decay_constant * i)
+
+    return adjusted_probability / sum(adjusted_probability)
+
+
+
+print("decaying decreasing")
+print(decaying_decreasing_weight(test, 0.5))
+print(sum(decaying_decreasing_weight(test, 0.5)))
+
+
+def radioactive_decay(initial_amount, decay_constant, time_points):
+    decayed_amount = initial_amount * np.exp(-decay_constant * time_points)
+    return decayed_amount / sum(decayed_amount)
+
+
+initial_amount = 1.0
+decay_constant = 0.1
+time_points = np.linspace(0, 10, 10)
+print("radioactive decay")
+decayed_amounts = radioactive_decay(initial_amount, decay_constant, time_points)
+print(decayed_amounts)
+print(sum(decayed_amounts))
+
 
 #
 #
