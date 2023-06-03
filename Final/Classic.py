@@ -44,13 +44,13 @@ def multiple_n(n_max):
         l_ratio = best_l/n
         prob_of_best = classic_probability(n, best_l)
         output[n, 0] = n
-        output[n, 1] = l_ratio
+        output[n, 1] = best_l
         output[n, 2] = prob_of_best
 
     return output
 
 
-output = multiple_n(11)
+output = multiple_n(13)
 # print(output)
 output = output[1:]
 print(output)
