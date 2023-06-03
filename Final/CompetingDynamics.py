@@ -92,6 +92,7 @@ def best_l(n):
     return l_probs
 
 
+""" This code shows what the best response of each candidate is"""
 n = 10
 cols = 2
 l = 9
