@@ -202,6 +202,12 @@ def many_n(n_max):
     for n in range(1, n_max):
         l_probs = best_l(n)
         probabilities = l_probs / n
+        print(probabilities)
+        print(sum(probabilities))
+        print("NOW IS ADJUSTED")
+        adjusted_probabilities = uniform_weight(probabilities)
+        print(adjusted_probabilities)
+        print(sum(adjusted_probabilities))
         max_value = np.max(probabilities)
         best_l_2 = np.argmax(probabilities)
         output[n, 0] = n
@@ -219,9 +225,9 @@ def uniform_weight(cumulative_probability):
     return cumulative_probability / len(cumulative_probability)
 
 
-print("Uniform")
-print(uniform_weight(test))
-print(sum(uniform_weight(test)))
+# print("Uniform")
+# print(uniform_weight(test))
+# print(sum(uniform_weight(test)))
 
 " Not working "
 
@@ -234,9 +240,9 @@ def linear_decreasing_weight(cumulative_probability):
     return adjusted_probability
 
 
-print("linear decreasing")
-print(linear_decreasing_weight(test))
-print(sum(linear_decreasing_weight(test)))
+# print("linear decreasing")
+# print(linear_decreasing_weight(test))
+# print(sum(linear_decreasing_weight(test)))
 
 
 def exponential_decreasing_weight(cumulative_probability):
@@ -247,9 +253,9 @@ def exponential_decreasing_weight(cumulative_probability):
     return adjusted_probability
 
 
-print("exponential decreasing")
-print(exponential_decreasing_weight(test))
-print(sum(exponential_decreasing_weight(test)))
+# print("exponential decreasing")
+# print(exponential_decreasing_weight(test))
+# print(sum(exponential_decreasing_weight(test)))
 
 
 def geometric_decreasing_weight(cumulative_probability, r):
@@ -261,9 +267,9 @@ def geometric_decreasing_weight(cumulative_probability, r):
     return adjusted_probability
 
 
-print("geometric decreasing")
-print(geometric_decreasing_weight(test, .5))
-print(sum(geometric_decreasing_weight(test, .5)))
+# print("geometric decreasing")
+# print(geometric_decreasing_weight(test, .5))
+# print(sum(geometric_decreasing_weight(test, .5)))
 
 
 def harmonic_decreasing_weight(cumulative_probability):
@@ -276,9 +282,9 @@ def harmonic_decreasing_weight(cumulative_probability):
     return adjusted_probability
 
 
-print("harmonic decreasing")
-print(harmonic_decreasing_weight(test))
-print(sum(harmonic_decreasing_weight(test)))
+# print("harmonic decreasing")
+# print(harmonic_decreasing_weight(test))
+# print(sum(harmonic_decreasing_weight(test)))
 
 
 def decaying_decreasing_weight(cumulative_probability, decay_constant):
@@ -292,9 +298,9 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
 
 
 
-print("decaying decreasing")
-print(decaying_decreasing_weight(test, 0.5))
-print(sum(decaying_decreasing_weight(test, 0.5)))
+# print("decaying decreasing")
+# print(decaying_decreasing_weight(test, 0.5))
+# print(sum(decaying_decreasing_weight(test, 0.5)))
 
 
 def radioactive_decay(initial_amount, decay_constant, time_points):
@@ -302,21 +308,21 @@ def radioactive_decay(initial_amount, decay_constant, time_points):
     return decayed_amount / sum(decayed_amount)
 
 
-initial_amount = 1.0
-decay_constant = 0.1
-time_points = np.linspace(0, 10, 10)
-print("radioactive decay")
-decayed_amounts = radioactive_decay(initial_amount, decay_constant, time_points)
-print(decayed_amounts)
-print(sum(decayed_amounts))
+# initial_amount = 1.0
+# decay_constant = 0.1
+# time_points = np.linspace(0, 10, 10)
+# print("radioactive decay")
+# decayed_amounts = radioactive_decay(initial_amount, decay_constant, time_points)
+# print(decayed_amounts)
+# print(sum(decayed_amounts))
 
 
 #
 #
-# output = many_n(11)
-# # print(output)
-# output = output[1:]
+output = many_n(50)
 # print(output)
+output = output[1:]
+print(output)
 #
 
 #
@@ -328,17 +334,18 @@ print(sum(decayed_amounts))
 # # output[:, 1] = np.random.random(n)  # Assign random values to the second column (blue points)
 # # output[:, 2] = np.random.random(n)  # Assign random values to the third column (red points)
 #
-# # Create the plot
-# plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
-# plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
-# plt.xlabel('X-axis')
-# plt.ylabel('Y-axis')
-# plt.title('Plot of Points')
-# plt.legend()
-# plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
-#
-# # Display the plot
-# plt.show()
+# Create the plot
+plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
+plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
+plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+plt.xlabel('Number of Candidates')
+plt.ylabel('Probability/Search Fraction')
+plt.title('Comparison between Secretary Problem')
+plt.legend()
+plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
+
+# Display the plot
+plt.show()
 #
 # # folder_path = "C:\\Users\\Tom McGrath\\Desktop\\TempUni\\Master\\Thesis\\CompetitiveSecretaryProblem\\Plots"
 # # filename = "plot1.png"
@@ -346,3 +353,30 @@ print(sum(decayed_amounts))
 # import math
 #
 # print(1 / math.e)
+
+
+import Classic as classic
+
+# output1 = classic.multiple_n(50)
+# output1 = output1[1:]
+# print(output1)
+#
+# print("Next is combined")
+# combined_output = np.hstack((output1[:, [0, 1, 2]], output[:, 1:]))
+# print(combined_output)
+#
+# # Create the plot
+# plt.scatter(combined_output[:, 0], combined_output[:, 1], c='blue', label='Classic Search Fraction')
+# plt.scatter(combined_output[:, 0], combined_output[:, 2], c='red', label='Classic Success Rate')
+# plt.scatter(combined_output[:, 0], combined_output[:, 3], c='green', label='Competitive Search Fraction')
+# plt.scatter(combined_output[:, 0], combined_output[:, 4], c='purple', label='Competitive Success Rate')
+#
+# plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+# plt.xlabel('Number of Candidates')
+# plt.ylabel('Probability/Search Fraction')
+# plt.title('Comparison between Secretary Problem')
+# plt.legend()
+# plt.ylim(-0.01, 1.01)  # Set the y-axis limits to 0 and 1
+#
+# # Display the plot
+# plt.show()

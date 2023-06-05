@@ -44,13 +44,13 @@ def multiple_n(n_max):
         l_ratio = best_l/n
         prob_of_best = classic_probability(n, best_l)
         output[n, 0] = n
-        output[n, 1] = best_l
+        output[n, 1] = l_ratio
         output[n, 2] = prob_of_best
 
     return output
 
 
-output = multiple_n(13)
+output = multiple_n(50)
 # print(output)
 output = output[1:]
 print(output)
@@ -68,11 +68,14 @@ print(output)
 # Create the plot
 plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
 plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
-plt.xlabel('X-axis')
-plt.ylabel('Y-axis')
-plt.title('Plot of Points')
+plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+plt.xlabel('Number of Candidates')
+plt.ylabel('Probability/Search Fraction')
+plt.title('Classic Secretary Problem')
 plt.legend()
 plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
 
 # Display the plot
 plt.show()
+
+
