@@ -82,35 +82,53 @@ def probability_best_chosen_BR(n, l, k):
         return "Error"
 
 
+""" This function finds the best l for a given number of applicants"""
+"It goes through each possible l and calculates the sum of probabilities for that l and n for each k"
+
+
 def best_l(n):
     l_probs = np.zeros(n)
+    unweighted = np.ones(n)
+    # weights = uniform_weight(unweighted)
+    # weights = linear_decreasing_weight(unweighted)
+    # weights = exponential_decreasing_weight(unweighted)
+    # weights = geometric_decreasing_weight(unweighted, 0.8)
+    # weights = harmonic_decreasing_weight(unweighted)
+    weights = decaying_decreasing_weight(unweighted, 0.5)
+
+    print("The weights are")
+    print(weights)
+    # weights = decaying_decreasing_weight(unweighted, 0.5)
+    print("we are in best l")
+    print(weights)
+    print(sum(weights))
     for l in range(0, n):
-        sum = 0
+        summ = 0
         for k in range(1, n + 1):
-            sum += probability_best_chosen_BR(n, l, k)
-        l_probs[l] = sum
+            summ += probability_best_chosen_BR(n, l, k) * weights[k-1]
+        l_probs[l] = summ
     return l_probs
 
 
 """ This code shows what the best response of each candidate is"""
-n = 10
-cols = 2
-l = 9
-best_choices = np.zeros((n, cols))
-for i in range(0, n):
-    k = i + 1
-    if 1 <= k < (n - l + 1):
-        if l < (math.factorial(n - l - 1) * math.factorial(n - k)) / (
-                math.factorial(n - 2) * math.factorial(n - k - l)):
-            best_choices[i, 0] = 1
-        elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (
-                math.factorial(n - 2) * math.factorial(n - k - l)):
-            best_choices[i, 0] = (n - l)
-    elif k >= (n - l + 1):
-        best_choices[i, 0] = (n - l)
-    else:
-        print("We got an error")
-    best_choices[i, 1] = probability_best_chosen_BR(n, l, k)
+# n = 10
+# cols = 2
+# l = 9
+# best_choices = np.zeros((n, cols))
+# for i in range(0, n):
+#     k = i + 1
+#     if 1 <= k < (n - l + 1):
+#         if l < (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+#                 math.factorial(n - 2) * math.factorial(n - k - l)):
+#             best_choices[i, 0] = 1
+#         elif l >= (math.factorial(n - l - 1) * math.factorial(n - k)) / (
+#                 math.factorial(n - 2) * math.factorial(n - k - l)):
+#             best_choices[i, 0] = (n - l)
+#     elif k >= (n - l + 1):
+#         best_choices[i, 0] = (n - l)
+#     else:
+#         print("We got an error")
+#     best_choices[i, 1] = probability_best_chosen_BR(n, l, k)
 
 
 # print(best_choices)
@@ -197,19 +215,35 @@ def varied_l(n):
 #
 #
 def many_n(n_max):
-    output = np.zeros((n_max, 3))
+    output = np.zeros((n_max+1, 3))
     # best_l = np.zeros(n_max)
-    for n in range(1, n_max):
+    for n in range(1, n_max+1):
         l_probs = best_l(n)
-        probabilities = l_probs / n
-        print(probabilities)
-        print(sum(probabilities))
-        print("NOW IS ADJUSTED")
-        adjusted_probabilities = uniform_weight(probabilities)
-        print(adjusted_probabilities)
-        print(sum(adjusted_probabilities))
-        max_value = np.max(probabilities)
-        best_l_2 = np.argmax(probabilities)
+        print("This is l_probs")
+        print(l_probs)
+        # probabilities = l_probs / n
+        # print(probabilities)
+        # print(sum(probabilities))
+        # print("NOW IS ADJUSTED")
+        # adjusted_probabilities = uniform_weight(l_probs)
+        # adjusted_probabilities = linear_decreasing_weight(l_probs)
+        # adjusted_probabilities = exponential_decreasing_weight(l_probs)
+        # adjusted_probabilities = geometric_decreasing_weight(l_probs, 0.8)
+        # adjusted_probabilities = harmonic_decreasing_weight(l_probs)
+        # adjusted_probabilities = decaying_decreasing_weight(l_probs, 0.7)
+        # initial_amount = 1.0
+        # decay_constant = 0.1
+        # time_points = np.linspace(0, 10, 10)
+        # adjusted_probabilities = radioactive_decay(l_probs, )
+
+        # print(adjusted_probabilities)
+        # print(sum(adjusted_probabilities))
+        max_value = np.max(l_probs)
+        best_l_2 = np.argmax(l_probs)
+        print("This is max value")
+        print(max_value)
+        print("This is best l_2")
+        print(best_l_2)
         output[n, 0] = n
         output[n, 1] = best_l_2 / n
         output[n, 2] = max_value
@@ -247,9 +281,14 @@ def linear_decreasing_weight(cumulative_probability):
 
 def exponential_decreasing_weight(cumulative_probability):
     adjusted_probability = np.zeros(len(cumulative_probability))
+    total_weight = 0
     for i in range(0, len(cumulative_probability)):
         adjusted_probability[i] = (cumulative_probability[i] * 2 ** (len(cumulative_probability) - (i))) / (
-                    (2 ** ((len(cumulative_probability) + 1))) - 1)
+                (2 ** ((len(cumulative_probability) + 1))) - 1)
+        total_weight += adjusted_probability[i]
+
+    adjusted_probability /= total_weight
+
     return adjusted_probability
 
 
@@ -297,33 +336,26 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
     return adjusted_probability / sum(adjusted_probability)
 
 
-
 # print("decaying decreasing")
-# print(decaying_decreasing_weight(test, 0.5))
-# print(sum(decaying_decreasing_weight(test, 0.5)))
+# print(decaying_decreasing_weight(test, 0.7))
+# print(sum(decaying_decreasing_weight(test, 0.7)))
 
 
-def radioactive_decay(initial_amount, decay_constant, time_points):
-    decayed_amount = initial_amount * np.exp(-decay_constant * time_points)
-    return decayed_amount / sum(decayed_amount)
-
-
-# initial_amount = 1.0
-# decay_constant = 0.1
-# time_points = np.linspace(0, 10, 10)
-# print("radioactive decay")
-# decayed_amounts = radioactive_decay(initial_amount, decay_constant, time_points)
-# print(decayed_amounts)
-# print(sum(decayed_amounts))
-
-
-#
-#
 output = many_n(50)
 # print(output)
 output = output[1:]
 print(output)
 #
+weights = np.ones(50)
+# weights = uniform_weight(weights)
+# weights = linear_decreasing_weight(weights)
+# weights = exponential_decreasing_weight(weights)
+# weights = geometric_decreasing_weight(weights, 0.8)
+# weights = harmonic_decreasing_weight(weights)
+weights = decaying_decreasing_weight(weights, 0.5)
+
+print(weights)
+# print(sum(weights))
 
 #
 # # n = 10  # Length of the array
@@ -337,13 +369,15 @@ print(output)
 # Create the plot
 plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
 plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
-plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
 plt.xlabel('Number of Candidates')
 plt.ylabel('Probability/Search Fraction')
-plt.title('Comparison between Secretary Problem')
+plt.title('Decaying Decreasing Secretary Problem')
 plt.legend()
-plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
+plt.ylim(-0.03, 1.03)  # Set the y-axis limits to 0 and 1
 
+# Add the faint line for 'weights' across the x-axis
+plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
 # Display the plot
 plt.show()
 #
@@ -352,10 +386,9 @@ plt.show()
 # # plt.savefig((folder_path + '\\' + filename))
 # import math
 #
-# print(1 / math.e)
+print(1 / math.e)
 
-
-import Classic as classic
+# import Classic as classic
 
 # output1 = classic.multiple_n(50)
 # output1 = output1[1:]
