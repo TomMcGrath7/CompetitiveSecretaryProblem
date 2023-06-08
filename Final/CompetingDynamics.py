@@ -357,15 +357,7 @@ weights = decaying_decreasing_weight(weights, 0.5)
 print(weights)
 # print(sum(weights))
 
-#
-# # n = 10  # Length of the array
-# # output = np.zeros((n, 3))  # Your 3-dimensional NumPy array
-# #
-# # # Generate random data for demonstration purposes
-# # output[:, 0] = np.linspace(0, 1, n)  # Assign values to the first column (x-axis)
-# # output[:, 1] = np.random.random(n)  # Assign random values to the second column (blue points)
-# # output[:, 2] = np.random.random(n)  # Assign random values to the third column (red points)
-#
+
 # Create the plot
 plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
 plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
