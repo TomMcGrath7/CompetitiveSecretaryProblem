@@ -82,6 +82,195 @@ def probability_best_chosen_BR(n, l, k):
         return "Error"
 
 
+
+def probability_best_chosen_BR_BIG(n, l, k):
+    if k == 1:
+        return 1
+    if l == 0 and k != 1:
+        return 0
+    elif 1 < k < (n - l + 1):
+        if l < math.exp(math.lgamma(n - l - 1) + math.lgamma(n - k) - math.lgamma(n - 2) - math.lgamma(n - k - l)):
+            numerator = 0
+            for i in range(2, k):
+                numerator += (1 / (i - 1)) * (
+                        math.exp(math.lgamma(l) + math.lgamma(n - l - 1) + math.lgamma(n - i - 1) - math.lgamma(l - 1) - math.lgamma(n - l - i)))
+            denominator = math.factorial(n - 1)
+            return numerator / denominator
+        elif l == math.exp(math.lgamma(n - l - 1) + math.lgamma(n - k) - math.lgamma(n - 2) - math.lgamma(n - k - l)):
+            numerator = 0
+            for i in range(2, k):
+                numerator += (1 / (i - 1)) * (
+                        math.exp(math.lgamma(l) + math.lgamma(n - l - 1) + math.lgamma(n - i - 1) - math.lgamma(l - 1) - math.lgamma(n - l - i)))
+            denominator = math.factorial(n - 1)
+            a = numerator / denominator
+            s = 0
+            for i in range(l + 1, n):
+                s += (1 / (i - 1))
+            b = (l / (n - 1)) * s
+            return max(a, b)
+        elif l >= math.exp(math.lgamma(n - l - 1) + math.lgamma(n - k) - math.lgamma(n - 2) - math.lgamma(n - k - l)):
+            s = 0
+            for i in range(l + 1, n):
+                s += (1 / (i - 1))
+            return (l / (n - 1)) * s
+    elif k >= (n - l + 1):
+        s = 0
+        for i in range(l + 1, n):
+            s += (1 / (i - 1))
+        return (l / (n - 1)) * s
+    else:
+        print("Error")
+        return "Error"
+
+
+def probability_best_chosen_BR_BIG2(n, l, k):
+    if k == 1:
+        return 1
+    if l == 0 and k != 1:
+        return 0
+    elif 1 < k < (n - l + 1):
+        if l < (math.comb(n - l - 1, n - k) / math.comb(n - 2, n - k - l)):
+            numerator = 0
+            for i in range(2, k):
+                numerator += (1 / (i - 1)) * (
+                        (math.comb(l, l - 1) * math.comb(n - l - 1, n - l - i) * math.comb(n, n - i - 1)))
+            denominator = math.factorial(n - 1)
+            return numerator / denominator
+        elif l == (math.comb(n - l - 1, n - k) / math.comb(n - 2, n - k - l)):
+            numerator = 0
+            for i in range(2, k):
+                numerator += (1 / (i - 1)) * (
+                        (math.comb(l, l - 1) * math.comb(n - l - 1, n - l - i) * math.comb(n, n - i - 1)))
+            denominator = math.factorial(n - 1)
+            a = numerator / denominator
+            sum = 0
+            for i in range(l + 1, n):
+                sum += (1 / (i - 1))
+            b = (l / (n - 1)) * sum
+            return max(a, b)
+        elif l >= (math.comb(n - l - 1, n - k) / math.comb(n - 2, n - k - l)):
+            sum = 0
+            for i in range(l + 1, n):
+                sum += (1 / (i - 1))
+            return (l / (n - 1)) * sum
+    elif k >= (n - l + 1):
+        sum = 0
+        for i in range(l + 1, n):
+            sum += (1 / (i - 1))
+        return (l / (n - 1)) * sum
+    else:
+        print("Error")
+        return "Error"
+
+
+from decimal import Decimal, getcontext
+
+# Set precision.
+getcontext().prec = 100
+
+
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+def probability_best_chosen_BR_BIG3(n, l, k):
+    n = Decimal(n)
+    l = Decimal(l)
+    k = Decimal(k)
+    if k == 1:
+        return Decimal(1)
+    if l == 0 and k != 1:
+        return Decimal(0)
+    elif 1 < k < (n - l + 1):
+        if l < (factorial(n - l - 1) * factorial(n - k)) / (
+                factorial(n - 2) * factorial(n - k - l)):
+            numerator = Decimal(0)
+            for i in range(2, int(k)):
+                numerator += (Decimal(1) / (Decimal(i) - Decimal(1))) * (
+                        (factorial(l) * factorial(n - l - Decimal(1)) * factorial(n - Decimal(i) - Decimal(1))) /
+                        (factorial(l - Decimal(1)) * factorial(n - l - Decimal(i))))
+            denominator = factorial(n - Decimal(1))
+            return numerator / denominator
+        elif l == (factorial(n - l - 1) * factorial(n - k)) / (
+                factorial(n - 2) * factorial(n - k - l)):
+            numerator = Decimal(0)
+            for i in range(2, int(k)):
+                numerator += (Decimal(1) / (Decimal(i) - Decimal(1))) * (
+                        (factorial(l) * factorial(n - l - Decimal(1)) * factorial(n - Decimal(i) - Decimal(1))) /
+                        (factorial(l - Decimal(1)) * factorial(n - l - Decimal(i))))
+            denominator = factorial(n - Decimal(1))
+            a = numerator / denominator
+            sum = Decimal(0)
+            for i in range(int(l) + 1, int(n)):
+                sum += (Decimal(1) / (Decimal(i) - Decimal(1)))
+            b = (l / (n - Decimal(1))) * sum
+            return max(a, b)
+        elif l >= (factorial(n - l - 1) * factorial(n - k)) / (
+                factorial(n - 2) * factorial(n - k - l)):
+            sum = Decimal(0)
+            for i in range(int(l) + 1, int(n)):
+                sum += (Decimal(1) / (Decimal(i) - Decimal(1)))
+            return (l / (n - Decimal(1))) * sum
+    elif k >= (n - l + 1):
+        sum = Decimal(0)
+        for i in range(int(l) + 1, int(n)):
+            sum += (Decimal(1) / (Decimal(i) - Decimal(1)))
+        return (l / (n - Decimal(1))) * sum
+    else:
+        print("Error")
+        return "Error"
+
+
+def probability_best_chosen_BR_BIG4(n, l, k):
+    n = np.float64(n)
+    l = np.float64(l)
+    k = np.float64(k)
+    if k == 1:
+        return np.float64(1)
+    if l == 0 and k != 1:
+        return np.float64(0)
+    elif 1 < k < (n - l + 1):
+        if l < (np.prod(np.arange(n - l, n - l - 1, -1)) * np.prod(np.arange(n - k, n - k, -1))) / (
+                np.prod(np.arange(n - 1, n - 2, -1)) * np.prod(np.arange(n - k - l, n - k - l, -1))):
+            numerator = np.float64(0)
+            for i in np.arange(2, k):
+                numerator += (np.float64(1) / (i - np.float64(1))) * (
+                        (np.prod(np.arange(l, l - 1, -1)) * np.prod(np.arange(n - l - 1, n - l - i, -1)) * np.prod(np.arange(n - i - 1, n - i - 1, -1))) /
+                        (np.prod(np.arange(l - 1, l - 1, -1)) * np.prod(np.arange(n - l - i, n - l - i, -1))))
+            denominator = np.prod(np.arange(n - 1, n - 1, -1))
+            return numerator / denominator
+        elif l == (np.prod(np.arange(n - l - 1, n - l - 1, -1)) * np.prod(np.arange(n - k, n - k, -1))) / (
+                np.prod(np.arange(n - 2, n - 2, -1)) * np.prod(np.arange(n - k - l, n - k - l, -1))):
+            numerator = np.float64(0)
+            for i in np.arange(2, k):
+                numerator += (np.float64(1) / (i - np.float64(1))) * (
+                        (np.prod(np.arange(l, l - 1, -1)) * np.prod(np.arange(n - l - 1, n - l - i, -1)) * np.prod(np.arange(n - i - 1, n - i - 1, -1))) /
+                        (np.prod(np.arange(l - 1, l - 1, -1)) * np.prod(np.arange(n - l - i, n - l - i, -1))))
+            denominator = np.prod(np.arange(n - 1, n - 1, -1))
+            a = numerator / denominator
+            sum = np.float64(0)
+            for i in np.arange(l + 1, n):
+                sum += (np.float64(1) / (i - np.float64(1)))
+            b = (l / (n - np.float64(1))) * sum
+            return max(a, b)
+        elif l >= (np.prod(np.arange(n - l - 1, n - l - 1, -1)) * np.prod(np.arange(n - k, n - k, -1))) / (
+                np.prod(np.arange(n - 2, n - 2, -1)) * np.prod(np.arange(n - k - l, n - k - l, -1))):
+            sum = np.float64(0)
+            for i in np.arange(l + 1, n):
+                sum += (np.float64(1) / (i - np.float64(1)))
+            return (l / (n - np.float64(1))) * sum
+    elif k >= (n - l + 1):
+        sum = np.float64(0)
+        for i in np.arange(l + 1, n):
+            sum += (np.float64(1) / (i - np.float64(1)))
+        return (l / (n - np.float64(1))) * sum
+    else:
+        print("Error")
+        return "Error"
+
 """ This function finds the best l for a given number of applicants"""
 "It goes through each possible l and calculates the sum of probabilities for that l and n for each k"
 
@@ -89,25 +278,39 @@ def probability_best_chosen_BR(n, l, k):
 def best_l(n):
     l_probs = np.zeros(n)
     unweighted = np.ones(n)
-    # weights = uniform_weight(unweighted)
+    weights = uniform_weight(unweighted)
     # weights = linear_decreasing_weight(unweighted)
     # weights = exponential_decreasing_weight(unweighted)
     # weights = geometric_decreasing_weight(unweighted, 0.8)
     # weights = harmonic_decreasing_weight(unweighted)
-    weights = decaying_decreasing_weight(unweighted, 0.5)
-
-    print("The weights are")
-    print(weights)
     # weights = decaying_decreasing_weight(unweighted, 0.5)
-    print("we are in best l")
-    print(weights)
-    print(sum(weights))
-    for l in range(0, n):
+
+    # print("The weights are")
+    # print(weights)
+    # weights = decaying_decreasing_weight(unweighted, 0.5)
+    # print("we are in best l")
+    # print(weights)
+    # print(sum(weights))
+    # print("n is")
+    # print(n)
+    if n == 1:
+        max_l = 0
+    elif n % 2 == 0:
+        max_l = int(n/2)
+    elif n % 2 != 0:
+        max_l = int((n-1)/2)
+    # print("max l is")
+    # print(max_l)
+    for l in range(0, (max_l+1)):
         summ = 0
         for k in range(1, n + 1):
-            summ += probability_best_chosen_BR(n, l, k) * weights[k-1]
+            # summ += probability_best_chosen_BR(n, l, k) * weights[k-1]
+            summ += probability_best_chosen_BR_BIG3(n, l, k) * Decimal(weights[k-1])
         l_probs[l] = summ
     return l_probs
+
+
+
 
 
 """ This code shows what the best response of each candidate is"""
@@ -218,9 +421,10 @@ def many_n(n_max):
     output = np.zeros((n_max+1, 3))
     # best_l = np.zeros(n_max)
     for n in range(1, n_max+1):
+        print(n)
         l_probs = best_l(n)
-        print("This is l_probs")
-        print(l_probs)
+        # print("This is l_probs")
+        # print(l_probs)
         # probabilities = l_probs / n
         # print(probabilities)
         # print(sum(probabilities))
@@ -240,10 +444,10 @@ def many_n(n_max):
         # print(sum(adjusted_probabilities))
         max_value = np.max(l_probs)
         best_l_2 = np.argmax(l_probs)
-        print("This is max value")
-        print(max_value)
-        print("This is best l_2")
-        print(best_l_2)
+        # print("This is max value")
+        # print(max_value)
+        # print("This is best l_2")
+        # print(best_l_2)
         output[n, 0] = n
         output[n, 1] = best_l_2 / n
         output[n, 2] = max_value
@@ -252,7 +456,7 @@ def many_n(n_max):
 
 
 test = np.ones(10)
-print(test)
+# print(test)
 
 
 def uniform_weight(cumulative_probability):
@@ -351,25 +555,25 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
     return adjusted_probability / sum(adjusted_probability)
 
 
-print("decaying decreasing")
-print(decaying_decreasing_weight(test, 0.7))
-print(sum(decaying_decreasing_weight(test, 0.7)))
+# print("decaying decreasing")
+# print(decaying_decreasing_weight(test, 0.7))
+# print(sum(decaying_decreasing_weight(test, 0.7)))
 
-
-output = many_n(50)
+n_test = 200
+output = many_n(n_test)
 # print(output)
 output = output[1:]
 print(output)
 #
-weights = np.ones(50)
-# weights = uniform_weight(weights)
+weights = np.ones(n_test)
+weights = uniform_weight(weights)
 # weights = linear_decreasing_weight(weights)
 # weights = exponential_decreasing_weight(weights)
 # weights = geometric_decreasing_weight(weights, 0.8)
 # weights = harmonic_decreasing_weight(weights)
-weights = decaying_decreasing_weight(weights, 0.5)
+# weights = decaying_decreasing_weight(weights, 0.5)
 
-print(weights)
+# print(weights)
 # print(sum(weights))
 
 
