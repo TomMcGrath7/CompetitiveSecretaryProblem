@@ -307,16 +307,17 @@ def geometric_decreasing_weight(cumulative_probability, r):
 
 
 # print("geometric decreasing")
-# print(geometric_decreasing_weight(test, .5))
-# print(sum(geometric_decreasing_weight(test, .5)))
+# print(geometric_decreasing_weight(test, .8))
+# print(sum(geometric_decreasing_weight(test, .8)))
 
 
 def harmonic_decreasing_weight(cumulative_probability):
     n = len(cumulative_probability)
     adjusted_probability = np.zeros(n)
     harmonic_sum = sum(1 / (i + 1) for i in range(n))
+    print(harmonic_sum)
     for i in range(n):
-        adjusted_probability[i] = cumulative_probability[i] / harmonic_sum / (i + 1)
+        adjusted_probability[i] = (cumulative_probability[i] / harmonic_sum) / (i + 1)
 
     return adjusted_probability
 
@@ -324,6 +325,20 @@ def harmonic_decreasing_weight(cumulative_probability):
 # print("harmonic decreasing")
 # print(harmonic_decreasing_weight(test))
 # print(sum(harmonic_decreasing_weight(test)))
+
+
+# def harmonic_decreasing_weight2(n):
+#     p = 1/n
+#     H = sum(1/i for i in range(1, n+1))
+#     a = np.array([p/(H*i) for i in range(1, n+1)])
+#     S = np.sum(a)
+#     a_normalized = a/S
+#     return a_normalized
+#
+#
+# print("harmonic decreasing2")
+# print(harmonic_decreasing_weight2(10))
+# print(sum(harmonic_decreasing_weight2(10)))
 
 
 def decaying_decreasing_weight(cumulative_probability, decay_constant):
@@ -336,9 +351,9 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
     return adjusted_probability / sum(adjusted_probability)
 
 
-# print("decaying decreasing")
-# print(decaying_decreasing_weight(test, 0.7))
-# print(sum(decaying_decreasing_weight(test, 0.7)))
+print("decaying decreasing")
+print(decaying_decreasing_weight(test, 0.7))
+print(sum(decaying_decreasing_weight(test, 0.7)))
 
 
 output = many_n(50)
