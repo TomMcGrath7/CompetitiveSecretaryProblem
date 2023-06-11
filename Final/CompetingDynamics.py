@@ -271,6 +271,64 @@ def probability_best_chosen_BR_BIG4(n, l, k):
         print("Error")
         return "Error"
 
+
+def probability_best_chosen_BR_BIG5(n, l, k):
+    n = int(n)
+    l = int(l)
+    k = int(k)
+
+    # Add +1 where necessary because lgamma(n) == factorial(n-1)
+
+    if k == 1:
+        return 1
+    if l == 0 and k != 1:
+        return 0
+    elif 1 < k < (n - l + 1):
+        if l < (math.lgamma(n - l + 2) + math.lgamma(n - k + 2) - math.lgamma(n) - math.lgamma(n - k - l + 2)):
+            numerators = []
+            for i in range(2, k):
+                numerators.append(math.log(1 / (i - 1)) +
+                                  math.lgamma(l + 2) + math.lgamma(n - l + 1) + math.lgamma(n - i + 2) -
+                                  (math.lgamma(l + 1) + math.lgamma(n - l - i + 2)))
+            if numerators:
+                a = max(numerators)
+                numerator = a + math.log(sum(math.exp(x - a) for x in numerators))
+            else:
+                numerator = 0
+            denominator = math.lgamma(n + 1)
+            return math.exp(numerator - denominator)
+        elif l == (math.lgamma(n - l + 2) + math.lgamma(n - k + 2) - math.lgamma(n) - math.lgamma(n - k - l + 2)):
+            numerators = []
+            for i in range(2, k):
+                numerators.append(math.log(1 / (i - 1)) +
+                                  math.lgamma(l + 2) + math.lgamma(n - l + 1) + math.lgamma(n - i + 2) -
+                                  (math.lgamma(l + 1) + math.lgamma(n - l - i + 2)))
+            if numerators:
+                a = max(numerators)
+                numerator = a + math.log(sum(math.exp(x - a) for x in numerators))
+            else:
+                numerator = 0
+            denominator = math.lgamma(n + 1)
+            a = math.exp(numerator - denominator)
+            summ = 0
+            for i in range(l + 1, n):
+                summ += (1 / (i - 1))
+            b = (l / (n - 1)) * summ
+            return max(a, b)
+        elif l >= (math.lgamma(n - l + 2) + math.lgamma(n - k + 2) - math.lgamma(n) - math.lgamma(n - k - l + 2)):
+            summ = 0
+            for i in range(l + 1, n):
+                summ += (1 / (i - 1))
+            return (l / (n - 1)) * summ
+    elif k >= (n - l + 1):
+        summ = 0
+        for i in range(l + 1, n):
+            summ += (1 / (i - 1))
+        return (l / (n - 1)) * summ
+    else:
+        print("Error")
+        return "Error"
+
 """ This function finds the best l for a given number of applicants"""
 "It goes through each possible l and calculates the sum of probabilities for that l and n for each k"
 
@@ -559,7 +617,7 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
 # print(decaying_decreasing_weight(test, 0.7))
 # print(sum(decaying_decreasing_weight(test, 0.7)))
 
-n_test = 200
+n_test = 1000
 output = many_n(n_test)
 # print(output)
 output = output[1:]
