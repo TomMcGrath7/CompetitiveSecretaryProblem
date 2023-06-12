@@ -176,6 +176,16 @@ def factorial(n):
         return n * factorial(n - 1)
 
 
+import logging
+import cProfile
+import pstats
+from decimal import Decimal
+from math import factorial
+
+# Set up logging
+logging.basicConfig(filename='debug.log', level=logging.DEBUG)
+
+
 def probability_best_chosen_BR_BIG3(n, l, k):
     n = Decimal(n)
     l = Decimal(l)
