@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import cProfile, pstats, io
 import logging
-
+import os
 # set up logging
 logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
@@ -187,14 +187,19 @@ def varied_l(n):
 
 def many_n(n_max):
     output = np.zeros((n_max + 1, 3))
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     for n in range(1, n_max + 1):
         print(n)
         l_probs = best_l(n)
         max_value = np.max(l_probs)
         best_l_2 = np.argmax(l_probs)
+
         output[n, 0] = n
         output[n, 1] = best_l_2 / n
         output[n, 2] = max_value
+        print(output[n, :])
+        if n % 10 == 0:  # Every 10 iterations
+            np.save(os.path.join(script_dir, 'output.npy'), output)
 
     return output
 
@@ -204,11 +209,12 @@ def uniform_weight(cumulative_probability):
 
 # Then start the main execution of your program in the main() function
 def main():
+    np.load('output.npy')
     pr = cProfile.Profile()
     pr.enable()
 
     # Code execution starts here
-    n_test = 1250
+    n_test = 750
     output = many_n(n_test)
     output = output[1:]
     print(output)
