@@ -424,48 +424,29 @@ def table_it(table):
 " Here will be the plot for fixed n and vary l. should be quadratic"
 " so we get an array with employer utility and l"
 
-n = 50  # This could change
-
 
 def varied_l(n):
     columns = 2
     output = np.zeros((n, columns))
+    unweighted = np.ones(n)
+    weights = uniform_weight(unweighted)
+    # weights = linear_decreasing_weight(unweighted)
+    # weights = exponential_decreasing_weight(unweighted)
+    # weights = geometric_decreasing_weight(unweighted, 0.8)
+    # weights = harmonic_decreasing_weight(unweighted)
+    # weights = decaying_decreasing_weight(unweighted, 0.5)
     for l in range(0, n):
         summ = 0
         for k in range(1, n + 1):
-            summ += probability_best_chosen_BR(n, l, k)
+            summ += probability_best_chosen_BR(n, l, k) * weights[k-1]
             # Get prob. of picking best
             # for every l get the probability of picking the best
         output[l, 0] = l / n
-        output[l, 1] = summ / n
+        output[l, 1] = summ
     return output
 
 
-# plotable = varied_l(n)
-# print(plotable)
-#
-# # Create a new figure and an axes
-# fig, ax = plt.subplots()
-#
-# # Scatter plot
-# ax.scatter(plotable[:, 0], plotable[:, 1], label='Data points')
-#
-# # Setting the limit for x and y axis
-# ax.set_xlim(0, 1)
-# ax.set_ylim(0, 1)
-#
-# # Label x and y axis
-# ax.set_xlabel('X-axis')
-# ax.set_ylabel('Y-axis')
-#
-# # Title for the plot
-# ax.set_title('Scatter plot of x and y values')
-#
-# # Displaying the legend
-# ax.legend()
-#
-# # Display the plot
-# plt.show()
+
 
 
 # n = 4
@@ -628,11 +609,39 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
 # print(sum(decaying_decreasing_weight(test, 0.7)))
 
 n_test = 1000
-output = many_n(n_test)
+# output = many_n(n_test)
 # print(output)
-output = output[1:]
-print(output)
+# output = output[1:]
+# print(output)
+
+n = 50
+plotable = varied_l(n)
+print(plotable)
 #
+# Create a new figure and an axes
+fig, ax = plt.subplots()
+
+# Scatter plot
+ax.scatter(plotable[:, 0], plotable[:, 1], label='Employer Utility')
+
+# Setting the limit for x and y axis
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+
+# Label x and y axis
+ax.set_xlabel('Search Fraction')
+ax.set_ylabel('Employer Utility')
+
+# Title for the plot
+ax.set_title('Employer Utility vs Search Fraction')
+
+# Displaying the legend
+ax.legend()
+
+# Display the plot
+plt.show()
+
+# Create the weights for the plot
 weights = np.ones(n_test)
 weights = uniform_weight(weights)
 # weights = linear_decreasing_weight(weights)
@@ -645,20 +654,22 @@ weights = uniform_weight(weights)
 # print(sum(weights))
 
 
-# Create the plot
-plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
-plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
-plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
-plt.xlabel('Number of Candidates')
-plt.ylabel('Probability/Search Fraction')
-plt.title('Decaying Decreasing Secretary Problem')
-plt.legend()
-plt.ylim(-0.03, 1.03)  # Set the y-axis limits to 0 and 1
 
-# Add the faint line for 'weights' across the x-axis
-plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
-# Display the plot
-plt.show()
+
+# Create the plot
+# plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
+# plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
+# plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+# plt.xlabel('Number of Candidates')
+# plt.ylabel('Probability/Search Fraction')
+# plt.title('Decaying Decreasing Secretary Problem')
+# plt.legend()
+# plt.ylim(-0.03, 1.03)  # Set the y-axis limits to 0 and 1
+#
+# # Add the faint line for 'weights' across the x-axis
+# plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
+# # Display the plot
+# plt.show()
 #
 # # folder_path = "C:\\Users\\Tom McGrath\\Desktop\\TempUni\\Master\\Thesis\\CompetitiveSecretaryProblem\\Plots"
 # # filename = "plot1.png"
