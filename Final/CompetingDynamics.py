@@ -176,14 +176,14 @@ def factorial(n):
         return n * factorial(n - 1)
 
 
-import logging
-import cProfile
-import pstats
-from decimal import Decimal
-from math import factorial
-
-# Set up logging
-logging.basicConfig(filename='debug.log', level=logging.DEBUG)
+# import logging
+# import cProfile
+# import pstats
+# from decimal import Decimal
+# from math import factorial
+#
+# # Set up logging
+# logging.basicConfig(filename='debug.log', level=logging.DEBUG)
 
 
 def probability_best_chosen_BR_BIG3(n, l, k):
@@ -430,10 +430,14 @@ def varied_l(n):
     output = np.zeros((n, columns))
     unweighted = np.ones(n)
     weights = uniform_weight(unweighted)
-    # weights = linear_decreasing_weight(unweighted)
-    # weights = exponential_decreasing_weight(unweighted)
+    print(weights)
+    weights = linear_decreasing_weight(unweighted)
+    print(weights)
+    weights = exponential_decreasing_weight(unweighted)
+    print(weights)
     # weights = geometric_decreasing_weight(unweighted, 0.8)
-    # weights = harmonic_decreasing_weight(unweighted)
+    weights = harmonic_decreasing_weight(unweighted)
+    print(weights)
     # weights = decaying_decreasing_weight(unweighted, 0.5)
     for l in range(0, n):
         summ = 0
@@ -633,7 +637,7 @@ ax.set_xlabel('Search Fraction')
 ax.set_ylabel('Employer Utility')
 
 # Title for the plot
-ax.set_title('Employer Utility vs Search Fraction')
+ax.set_title('Harmonic Decreasing Weight: Employer Utility vs Search Fraction')
 
 # Displaying the legend
 ax.legend()
