@@ -1,7 +1,4 @@
-import math
-import numpy as np
-import Functions
-
+from IntermediateWork import Functions
 
 """ New Ideas """
 # For the game to represent life more realistically, you can change the game such that decision to say no is not final
