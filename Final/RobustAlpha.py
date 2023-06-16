@@ -34,3 +34,13 @@ def robust_alpha(n_max, l):
             output[n, 2] = alpha_n_l / n
 
     return output
+
+
+
+e = math.e
+# print(e)
+n_max = 100
+l = round(n_max/e)
+# print(l)
+
+
