@@ -60,7 +60,7 @@ def robust_alpha(n_max):
 
 e = math.e
 # print(e)
-n_max = 100 
+n_max = 5
 # l = round(n_max/e)
 # print(l)
 
