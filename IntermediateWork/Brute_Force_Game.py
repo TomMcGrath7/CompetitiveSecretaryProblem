@@ -3,7 +3,7 @@ import itertools
 
 """ Inputs """
 n = 10
-l = 4
+l = 1
 
 candidates = np.array(list(range(1, n+1)))
 print(candidates)

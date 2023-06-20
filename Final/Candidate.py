@@ -61,8 +61,8 @@ def expected_candidate_payoffs_alt(n, l, alpha):
 
 
 n = 10
-l = 5
-alpha = 2
+l = 1
+alpha = 3
 
 expected_payoff = expected_candidate_payoffs(n, l, alpha)
 print(expected_payoff)
