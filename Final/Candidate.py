@@ -36,12 +36,39 @@ def expected_candidate_payoffs(n, l, alpha):
     return np.round(payoffs, decimals=4)
 
 
+def expected_candidate_payoffs_alt(n, l, alpha):
+    payoffs = np.empty((n, 2))
+    for k in range(1, n + 1):
+        print(k)
+        if n - k - l - alpha + 2 > 0:
+            upper = (math.factorial(l+(alpha-1)) * math.factorial(n - l - alpha) * math.factorial(
+                n - k))
+            print(upper)
+            lower = (math.factorial(n - 1) * math.factorial(n - k - l - alpha + 1) * math.factorial(l + alpha - 1))
+            print(lower)
+            payoffs[k - 1, 0] = upper / lower
+            payoffs[k - 1, 1] = (l / (n - 1))
+        elif n-l == 1 :
+            payoffs[k - 1, 0] = 1
+            payoffs[k - 1, 1] = 1
+        else:
+            payoffs[k - 1, 0] = 0
+            payoffs[k - 1, 1] = (l / (n - 1))
+
+    # payoffs[(n - l):n, 0] = 0
+
+    return np.round(payoffs, decimals=4)
+
+
 n = 10
-l = 9
-alpha = 1
+l = 5
+alpha = 2
 
 expected_payoff = expected_candidate_payoffs(n, l, alpha)
 print(expected_payoff)
+print("Next")
+expected_payoff_alt = expected_candidate_payoffs_alt(n, l, alpha)
+print(expected_payoff_alt)
 
 
 def tableFy(payoffs):
