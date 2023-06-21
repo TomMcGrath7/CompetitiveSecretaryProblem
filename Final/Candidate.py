@@ -43,9 +43,7 @@ def expected_candidate_payoffs_alt(n, l, alpha):
         if n - k - l - alpha + 2 > 0:
             upper = (math.factorial(l+(alpha-1)) * math.factorial(n - l - alpha) * math.factorial(
                 n - k))
-            print(upper)
             lower = (math.factorial(n - 1) * math.factorial(n - k - l - alpha + 1) * math.factorial(l + alpha - 1))
-            print(lower)
             payoffs[k - 1, 0] = upper / lower
             payoffs[k - 1, 1] = (l / (n - 1))
         elif n-l == 1 :
