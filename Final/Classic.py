@@ -50,7 +50,7 @@ def multiple_n(n_max):
     return output
 
 
-output = multiple_n(50)
+output = multiple_n(11)
 # print(output)
 output = output[1:]
 print(output)
