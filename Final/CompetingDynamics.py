@@ -612,7 +612,7 @@ def decaying_decreasing_weight(cumulative_probability, decay_constant):
 # print(decaying_decreasing_weight(test, 0.7))
 # print(sum(decaying_decreasing_weight(test, 0.7)))
 
-n_test = 10
+n_test = 100
 output = many_n(n_test)
 # print(output)
 output = output[1:]
@@ -684,7 +684,7 @@ print(1 / math.e)
 
 import Classic as classic
 
-output1 = classic.multiple_n(50)
+output1 = classic.multiple_n(101)
 output1 = output1[1:]
 print(output1)
 
@@ -709,9 +709,10 @@ print(combined_output)
 # plt.show()
 
 # Create the plot for search fractions
+# Plot 1: Classic and Competitive Search Fractions
 plt.figure(figsize=(8, 6))
-plt.plot(combined_output[:, 0], combined_output[:, 1], c='blue', label='Classic Search Fraction')
-plt.plot(combined_output[:, 0], combined_output[:, 3], c='green', label='Competitive Search Fraction')
+plt.scatter(combined_output[:, 0], combined_output[:, 1], c='blue', s=1, label='Classic Search Fraction')
+plt.scatter(combined_output[:, 0], combined_output[:, 3], c='green', s=1, label='Competitive Search Fraction')
 
 plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
 plt.xlabel('Number of Candidates')
@@ -720,13 +721,13 @@ plt.title('Classic vs Competitive Search Fractions')
 plt.legend()
 plt.ylim(-0.01, 1.01)  # Set the y-axis limits to 0 and 1
 
-# Display the plot for search fractions
+# Display the scatter plot for search fractions
 plt.show()
 
-# Create the plot for success rates
+# Plot 2: Classic and Competitive Success Rates
 plt.figure(figsize=(8, 6))
-plt.plot(combined_output[:, 0], combined_output[:, 2], c='red', label='Classic Success Rate')
-plt.plot(combined_output[:, 0], combined_output[:, 4], c='purple', label='Competitive Success Rate')
+plt.scatter(combined_output[:, 0], combined_output[:, 2], c='red', s=1, label='Classic Success Rate')
+plt.scatter(combined_output[:, 0], combined_output[:, 4], c='purple', s=1, label='Competitive Success Rate')
 
 plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
 plt.xlabel('Number of Candidates')
@@ -735,7 +736,7 @@ plt.title('Classic vs Competitive Success Rates')
 plt.legend()
 plt.ylim(-0.01, 1.01)  # Set the y-axis limits to 0 and 1
 
-# Display the plot for success rates
+# Display the scatter plot for success rates
 plt.show()
 
 
