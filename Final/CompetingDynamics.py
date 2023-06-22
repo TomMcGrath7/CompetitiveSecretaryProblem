@@ -661,19 +661,19 @@ print(output)
 
 
 # Create the plot
-plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
-plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
-plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
-plt.xlabel('Number of Candidates')
-plt.ylabel('Probability/Search Fraction')
-plt.title('Decaying Decreasing Secretary Problem')
-plt.legend()
-plt.ylim(-0.03, 1.03)  # Set the y-axis limits to 0 and 1
-
-# Add the faint line for 'weights' across the x-axis
-# plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
-# Display the plot
-plt.show()
+# plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
+# plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
+# plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+# plt.xlabel('Number of Candidates')
+# plt.ylabel('Probability/Search Fraction')
+# plt.title('Decaying Decreasing Secretary Problem')
+# plt.legend()
+# plt.ylim(-0.03, 1.03)  # Set the y-axis limits to 0 and 1
+#
+# # Add the faint line for 'weights' across the x-axis
+# # plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
+# # Display the plot
+# plt.show()
 #
 # # folder_path = "C:\\Users\\Tom McGrath\\Desktop\\TempUni\\Master\\Thesis\\CompetitiveSecretaryProblem\\Plots"
 # # filename = "plot1.png"
@@ -682,17 +682,17 @@ plt.show()
 #
 print(1 / math.e)
 
-# import Classic as classic
+import Classic as classic
 
-# output1 = classic.multiple_n(50)
-# output1 = output1[1:]
-# print(output1)
-#
-# print("Next is combined")
-# combined_output = np.hstack((output1[:, [0, 1, 2]], output[:, 1:]))
-# print(combined_output)
-#
-# # Create the plot
+output1 = classic.multiple_n(50)
+output1 = output1[1:]
+print(output1)
+
+print("Next is combined")
+combined_output = np.hstack((output1[:, [0, 1, 2]], output[:, 1:]))
+print(combined_output)
+
+# Create the plot
 # plt.scatter(combined_output[:, 0], combined_output[:, 1], c='blue', label='Classic Search Fraction')
 # plt.scatter(combined_output[:, 0], combined_output[:, 2], c='red', label='Classic Success Rate')
 # plt.scatter(combined_output[:, 0], combined_output[:, 3], c='green', label='Competitive Search Fraction')
@@ -707,3 +707,35 @@ print(1 / math.e)
 #
 # # Display the plot
 # plt.show()
+
+# Create the plot for search fractions
+plt.figure(figsize=(8, 6))
+plt.plot(combined_output[:, 0], combined_output[:, 1], c='blue', label='Classic Search Fraction')
+plt.plot(combined_output[:, 0], combined_output[:, 3], c='green', label='Competitive Search Fraction')
+
+plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+plt.xlabel('Number of Candidates')
+plt.ylabel('Search Fraction')
+plt.title('Classic vs Competitive Search Fractions')
+plt.legend()
+plt.ylim(-0.01, 1.01)  # Set the y-axis limits to 0 and 1
+
+# Display the plot for search fractions
+plt.show()
+
+# Create the plot for success rates
+plt.figure(figsize=(8, 6))
+plt.plot(combined_output[:, 0], combined_output[:, 2], c='red', label='Classic Success Rate')
+plt.plot(combined_output[:, 0], combined_output[:, 4], c='purple', label='Competitive Success Rate')
+
+plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+plt.xlabel('Number of Candidates')
+plt.ylabel('Success Rate')
+plt.title('Classic vs Competitive Success Rates')
+plt.legend()
+plt.ylim(-0.01, 1.01)  # Set the y-axis limits to 0 and 1
+
+# Display the plot for success rates
+plt.show()
+
+

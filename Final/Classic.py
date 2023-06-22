@@ -32,9 +32,7 @@ def find_best_l(n):
     return best_l
 
 
-n = 10
-best_l = find_best_l(n)
-print("Best l for n =", n, "is", best_l)
+
 
 
 def multiple_n(n_max):
@@ -50,32 +48,36 @@ def multiple_n(n_max):
     return output
 
 
-output = multiple_n(11)
-# print(output)
-output = output[1:]
-print(output)
+if __name__ == "__main__":
+    n = 10
+    best_l = find_best_l(n)
+    print("Best l for n =", n, "is", best_l)
 
+    output = multiple_n(11)
+    # print(output)
+    output = output[1:]
+    print(output)
 
+    # n = 10  # Length of the array
+    # output = np.zeros((n, 3))  # Your 3-dimensional NumPy array
+    #
+    # # Generate random data for demonstration purposes
+    # output[:, 0] = np.linspace(0, 1, n)  # Assign values to the first column (x-axis)
+    # output[:, 1] = np.random.random(n)  # Assign random values to the second column (blue points)
+    # output[:, 2] = np.random.random(n)  # Assign random values to the third column (red points)
 
-# n = 10  # Length of the array
-# output = np.zeros((n, 3))  # Your 3-dimensional NumPy array
-#
-# # Generate random data for demonstration purposes
-# output[:, 0] = np.linspace(0, 1, n)  # Assign values to the first column (x-axis)
-# output[:, 1] = np.random.random(n)  # Assign random values to the second column (blue points)
-# output[:, 2] = np.random.random(n)  # Assign random values to the third column (red points)
+    # Create the plot
+    plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
+    plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
+    plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
+    plt.xlabel('Number of Candidates')
+    plt.ylabel('Probability/Search Fraction')
+    plt.title('Classic Secretary Problem')
+    plt.legend()
+    plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
 
-# Create the plot
-plt.scatter(output[:, 0], output[:, 1], c='blue', label='Search Fraction')
-plt.scatter(output[:, 0], output[:, 2], c='red', label='Probability Picking best')
-plt.axhline(1/np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
-plt.xlabel('Number of Candidates')
-plt.ylabel('Probability/Search Fraction')
-plt.title('Classic Secretary Problem')
-plt.legend()
-plt.ylim(0, 1)  # Set the y-axis limits to 0 and 1
+    # Display the plot
+    plt.show()
 
-# Display the plot
-plt.show()
 
 
