@@ -189,7 +189,7 @@ def many_n(n_max):
     output = np.zeros((n_max + 1, 3))
     script_dir = os.path.dirname(os.path.abspath(__file__))
     for n in range(1, n_max + 1):
-        print(n)
+        # print(n)
         l_probs = best_l(n)
         max_value = np.max(l_probs)
         best_l_2 = np.argmax(l_probs)
@@ -214,7 +214,7 @@ def main():
     pr.enable()
 
     # Code execution starts here
-    n_test = 750
+    n_test = 250
     output = many_n(n_test)
     output = output[1:]
     print(output)
@@ -228,12 +228,12 @@ def main():
     plt.axhline(1 / np.e, color='gray', linestyle='dotted', alpha=0.3, label='1/e')
     plt.xlabel('Number of Candidates')
     plt.ylabel('Probability/Search Fraction')
-    plt.title('Decaying Decreasing Secretary Problem')
+    plt.title('Long Run Relationship Between l* and n')
     plt.legend()
-    plt.ylim(-0.03, 1.03)  # Set the y-axis limits to 0 and 1
+    plt.ylim(-0.01, 1.01)  # Set the y-axis limits to 0 and 1
 
     # Add the faint line for 'weights' across the x-axis
-    plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
+    # plt.plot(output[0:, 0], weights, color='gray', linewidth=0.5, alpha=0.5)
     # Display the plot
     plt.show()
 
