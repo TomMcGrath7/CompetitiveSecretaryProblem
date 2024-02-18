@@ -138,6 +138,6 @@ print("---------------------")
 print(emp_modified_wins)
 
 # To do
-# Check
+# Check the success rates for different n and k
 
 
