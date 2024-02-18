@@ -54,13 +54,15 @@ def expected_candidate_payoffs(n, l, alpha):
 
 
 """ Inputs """
-n = 6
+n = 5
 k = 1
 l = 2
-alpha = 2
+alpha = 0
 
 perms = create_custom_permutations(n, k, l, alpha)
 emp = empirical_wins(perms, n, l)
 exp = expected_candidate_payoffs(n, l, alpha)
+print("Empirical wins")
 print(emp)
+print("Expected payoffs")
 print(exp)
