@@ -36,14 +36,15 @@ def classic_stopping_rule_empirical_wins(permutations, l):
 
     Returns:
     - numpy.ndarray: An array of win percentages for each player, indicating the proportion of permutations
-                     where each player is considered to have won, with the understanding that the employer's win
-                     rate is equivalent to the win rate of the player with rank k=1.
+                     where each player is considered to have won. The employer's win rate is conceptually
+                     equivalent to the win rate of the player with rank k=1, as selecting the top-ranked player
+                     is considered a win for the employer.
 
-    The function divides each permutation into two segments at position `l` and determines wins
-    based on the lowest player index found before and after this position. A win is assigned to a player if they
-    have the lowest index in the post-l segment that is lower than any index in the pre-l segment. If no such player
-    exists, the win defaults to the player in the last position. It implicitly accounts for the employer's win
-    whenever the player with rank k=1 wins, reflecting the employer's utility gain from selecting the top-ranked player.
+    The function divides each permutation into two segments at position `l` and determines wins based on the
+    lowest player index found before and after this position. A win is assigned to a player if they have the
+    lowest index in the post-l segment that is lower than any index in the pre-l segment. If no such player
+    exists, the win defaults to the player in the last position. The win rate for the employer is implicitly
+    represented by the win rate of the player with rank k=1, without the need for separate tracking.
     """
     if not permutations:
         return np.array([])  # Return an empty array if permutations list is empty
@@ -51,7 +52,7 @@ def classic_stopping_rule_empirical_wins(permutations, l):
     number_of_players = len(permutations[0])  # Determine the number of players from the length of a permutation
     wins = np.zeros(number_of_players)
     for perm in permutations:
-        best_rank = number_of_players + 1  # Adjust to account for employer win
+        best_rank = number_of_players + 1
         for j in range(0, l):
             if perm[j] < best_rank:
                 best_rank = perm[j]
@@ -70,7 +71,7 @@ def classic_stopping_rule_empirical_wins(permutations, l):
 
 n = 10
 l = 3
-alpha = l+1
+alpha = 10
 k = 1
 
 perms = create_custom_permutations(n, k, alpha)
