@@ -69,11 +69,75 @@ def classic_stopping_rule_empirical_wins(permutations, l):
     return win_percents
 
 
+# n = 10
+# l = 3
+# alpha = 10
+# k = 1
+#
+# perms = create_custom_permutations(n, k, alpha)
+# emp_wins = classic_stopping_rule_empirical_wins(perms, l)
+# print(emp_wins)
+
+
+def revised_stopping_rule_empirical_wins(permutations, l):
+    """
+    Calculate the empirical win rates for each player based on a set of permutations, under a revised stopping
+    rule. A player wins if they are the best seen so far after 'l', surpassing even the first candidate who was
+    better than all players before 'l' and subsequently skipped.
+
+    Args:
+    - permutations (list of tuples): A list of permutations representing possible outcomes.
+    - l (int): A specific position that divides each permutation into two segments for analysis.
+
+    Returns:
+    - numpy.ndarray: An array of win percentages for each player, indicating the proportion of permutations
+                     where each player is considered to have won under the revised stopping rule.
+
+    Under this rule, the function skips the first player post-'l' who is better than all players pre-'l'. The winner
+    is the next player who is the best among all encountered so far, including those skipped. If no such player
+    is found, the player in the last position wins by default.
+    """
+    if not permutations:
+        return np.array([])  # Return an empty array if permutations list is empty
+
+    number_of_players = len(permutations[0])  # Determine the number of players from the length of a permutation
+    wins = np.zeros(number_of_players)
+    for perm in permutations:
+        best_rank = number_of_players + 1
+        skip_next_better = True
+        for j in range(0, l):
+            if perm[j] < best_rank:
+                best_rank = perm[j]
+        best_l = best_rank
+        for k in range(l, number_of_players):
+            if perm[k] < best_rank:
+                if skip_next_better:
+                    skip_next_better = False
+                    best_rank = perm[k]
+                else:
+                    best_rank = perm[k]
+                    wins[best_rank - 1] += 1
+                    break
+        if best_l == best_rank:
+            wins[perm[number_of_players - 1] - 1] += 1
+
+    win_percents = wins / len(permutations)
+    return win_percents
+
+
 n = 10
 l = 3
-alpha = 10
-k = 1
+alpha = l+1
+k = 3
 
 perms = create_custom_permutations(n, k, alpha)
-emp_wins = classic_stopping_rule_empirical_wins(perms, l)
-print(emp_wins)
+emp_classic_wins = classic_stopping_rule_empirical_wins(perms, l)
+emp_modified_wins = revised_stopping_rule_empirical_wins(perms, l)
+print(emp_classic_wins)
+print("---------------------")
+print(emp_modified_wins)
+
+# To do
+# Check
+
+
