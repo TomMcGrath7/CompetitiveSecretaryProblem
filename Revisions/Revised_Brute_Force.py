@@ -125,37 +125,18 @@ def revised_stopping_rule_empirical_wins(permutations, l):
     win_percents = wins / len(permutations)
     return win_percents
 
-#
-# n = 10
-# l = 3
-# alpha = l+1
-# k = 3
-#
-# perms = create_custom_permutations(n, k, alpha)
-# emp_classic_wins = classic_stopping_rule_empirical_wins(perms, l)
-# emp_modified_wins = revised_stopping_rule_empirical_wins(perms, l)
-# print(emp_classic_wins)
-# print("---------------------")
-# print(emp_modified_wins)
-
-# To do
-# Check the success rates for different n and k
-
-# first compare the different values of n and same k and we are comparing the wins of player 1 (so index 0 of the array)
-# for the different values of n
-
 # Initialize lists to store the results
-n_values = range(5, 11)
+n_values = range(5, 12)
 classic_wins = []
 modified_wins = []
 
-k = 2
-
+k = 5
 
 for n in n_values:
+    print(n)
     l = int(np.ceil(n / np.e))
     alpha = l + 1
-    perms = create_custom_permutations(n, 2, alpha)
+    perms = create_custom_permutations(n, k, alpha)
     emp_classic_wins = classic_stopping_rule_empirical_wins(perms, l)
     emp_modified_wins = revised_stopping_rule_empirical_wins(perms, l)
     classic_wins.append(emp_classic_wins[0])
@@ -166,8 +147,8 @@ plt.figure(figsize=(10, 6))
 plt.plot(n_values, classic_wins, label='Classic Wins', marker='o')
 plt.plot(n_values, modified_wins, label='Modified Wins', marker='s')
 plt.xlabel('n')
-plt.ylabel('Empirical Wins')
-plt.title('Empirical Wins vs. n')
+plt.ylabel('Success Rate')
+plt.title('Success Rate for Employer vs. k = 5')
 plt.legend()
 plt.grid(True)
 plt.show()
