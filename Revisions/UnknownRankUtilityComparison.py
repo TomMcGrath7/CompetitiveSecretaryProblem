@@ -43,7 +43,7 @@ def sum_expression_math(n, l):
     return total_sum
 
 n = 2
-l = int(np.ceil(n / np.e))
+l = int(np.ceil(n -1/ np.e))
 print(sum_expression_np(n, l))
 print(sum_expression_math(n, l))
 print(n*l/(n-1))
@@ -58,7 +58,7 @@ for n in n_values:
     print("n is ")
     print(n)
     print("l is ")
-    l = int(np.ceil(n / np.e))
+    l = int(np.ceil((n -1)/ np.e))
     print(l)
     sum_expression_values.append(sum_expression_np(n, l))
     n_l_div_n_minus_1_values.append(n * l / (n - 1))
