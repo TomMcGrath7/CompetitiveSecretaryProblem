@@ -61,7 +61,7 @@ e = np.e
 # We then loop through all values of l from 0 to n and calculate the best l for each n.
 # For the competive problem we need to also sum over each k from 1 to n.
 
-for n in range(1, 130):
+for n in range(1, 20):
     best_c_star_value = 0
     best_c_star_n_minus_1_value = 0
     best_l_star_value = 0
@@ -110,4 +110,21 @@ plt.ylabel('Value / (Index+1)')
 plt.title('Dot Plot Comparison')
 
 # Show plot
-plt.show()
+# plt.show()
+
+
+def create_latex_table(c_star, c_star_n_minus_1, l_star):
+    header = "\\begin{table}[h!]\n\\centering\n\\begin{tabular}{|c|c|c|}\n\\hline\n"
+    column_titles = "C* & C*-1 & L* \\\\ \\hline\n"
+    footer = "\\hline\n\\end{tabular}\n\\caption{Your Caption Here}\n\\label{table:your_label}\n\\end{table}"
+
+    body = ""
+    for c, cn, l in zip(c_star, c_star_n_minus_1, l_star):
+        row = f"{c} & {cn} & {l} \\\\\n"
+        body += row
+
+    return header + column_titles + body + footer
+
+
+latex_table = create_latex_table(c_star_values, c_star_n_minus_1_values, l_star_values)
+print(latex_table)
