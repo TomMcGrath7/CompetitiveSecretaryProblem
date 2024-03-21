@@ -4,7 +4,8 @@ import numpy as np
 
 def c_star(l, n):
     # calculates the probability of a picking the best for a given l and n in the classic game, c* would be the l
-    # that maximises this expression
+    # that maximises this expression. If l is 0 then there is just a 1/n chance of picking the best.
+    # Otherwise we just do the summation from l+1 to n.
     if l == 0:
         return 1 / n
     else:
@@ -14,6 +15,8 @@ def c_star(l, n):
 def c_star_n_minus_1(l, n):
     # calculates the probability of a picking the best for a given l and n in the classic game where we can ignore
     # the last player, c*(n-1) would be the l that maximises this expression
+    # If l is 0 then there is just a 1/n chance of picking the best. Otherwise we just do the summation from l+1 to n-1.
+    # Since we can basically ignore the last player.
     if l == 0:
         return 1 / n
     else:
@@ -50,6 +53,12 @@ c_star_n_minus_1_values = []
 l_star_values = []
 e = np.e
 
+# We loop through all values of n from 1 to 130 and calculate the best l for each n
+# We append these best values to the array where we store the best l for each optimisation function.
+# We set the best value to 0 and the best l to 0 each time we start a new n.
+# We then loop through all values of l from 0 to n and calculate the best l for each n.
+# For the competive problem we need to also sum over each k from 1 to n.
+
 for n in range(1, 130):
     best_c_star_value = 0
     best_c_star_n_minus_1_value = 0
@@ -77,6 +86,8 @@ for n in range(1, 130):
 print(c_star_values)
 print(c_star_n_minus_1_values)
 print(l_star_values)
+
+# We divide the values by the index + 1 to get the search fraction for each n.
 
 c_star_plot_values = c_star_values / (np.arange(len(c_star_values)) + 1)
 c_star_n_minus_1_plot_values = c_star_n_minus_1_values / (np.arange(len(c_star_n_minus_1_values)) + 1)
