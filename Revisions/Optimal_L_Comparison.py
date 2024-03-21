@@ -17,8 +17,10 @@ def c_star_n_minus_1(l, n):
     # the last player, c*(n-1) would be the l that maximises this expression
     # If l is 0 then there is just a 1/n chance of picking the best. Otherwise we just do the summation from l+1 to n-1.
     # Since we can basically ignore the last player.
-    if l == 0:
-        return 1 / n
+    if n == 1:
+        return 1
+    elif l == 0:
+        return 1 / (n-1)
     else:
         return (l / (n - 1)) * sum(1 / (i - 1) for i in range(l + 1, n))
 
