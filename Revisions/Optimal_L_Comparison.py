@@ -64,11 +64,11 @@ for n in range(1, 130):
         if c_star_n_minus_1(l, n) > best_c_star_n_minus_1_value:
             best_c_star_n_minus_1_value = c_star_n_minus_1(l, n)
             current_best_l_c_star_n_minus_1 = l
-        sum_current_k = 0
+        sum_current_l = 0
         for k in range(1, n + 1):
-            sum_current_k += l_star(l, n, k)
-        if sum_current_k > best_l_star_value:
-            best_l_star_value = sum_current_k
+            sum_current_l += l_star(l, n, k)
+        if sum_current_l > best_l_star_value:
+            best_l_star_value = sum_current_l
             current_best_l_l_star = l
     c_star_values.append(current_best_l_c_star)
     c_star_n_minus_1_values.append(current_best_l_c_star_n_minus_1)
