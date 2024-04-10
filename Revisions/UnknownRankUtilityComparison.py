@@ -12,7 +12,7 @@ def sum_expression_np(n, l):
     binom_coeffs = comb(n - k_values, l, exact=False)
 
     # Calculating the constant term outside the sum
-    constant_term = factorial(l) * factorial(n - l - 1) / factorial(n - 1)
+    constant_term = (factorial(l) * factorial(n - l - 1)) / factorial(n - 1)
 
     # Calculating the total sum
     total_sum = np.sum(constant_term * binom_coeffs)
@@ -37,7 +37,7 @@ def sum_expression_math(n, l):
             total_sum += 0
         else:
             binom_coeff = binomial_coefficient(n - k, l)
-            term = math.factorial(l) * math.factorial(n - l - 1) / math.factorial(n - 1)
+            term = (math.factorial(l) * math.factorial(n - l - 1)) / math.factorial(n - 1)
             total_sum += term * binom_coeff
 
     return total_sum
@@ -61,7 +61,7 @@ def c_star_n_minus_1(l, n):
 
 import matplotlib.pyplot as plt
 
-n_values = range(2, 15)
+n_values = range(2, 150)
 sum_expression_values = []
 n_l_div_n_minus_1_values = []
 
